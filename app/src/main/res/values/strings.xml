@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Smart Worker</string>
+    <dimen name="textsize">18sp</dimen>
+    <dimen name="icon_width">90dp</dimen>
+    <dimen name="icon_hight">90dp</dimen>
+    <dimen name="margin_left">30dp</dimen>
+    <string name="forget"><u>Forget Password?</u></string>
+    <string name="rigester"><u>Register Now</u></string>
+    <string name="remember"><u>I Remember</u></string>
+
+    <string name="about_us1">A smart worker is an application that will help mainly two kinds of people: customers and workers</string>
+    <string name="about_us2">The idea is connecting them together via a mobile application to have an agreement for the work to be done.</string>
+    <string name="about_us3">The core of this idea is based on finding the nearest workers then connect them with the customer to discuss the problem and price.</string>
+    <string name="imagename"></string>
+    <array name="fields">
+        <item>Carpenter</item>
+        <item>Electrician</item>
+        <item>Air CR</item>
+        <item>Flooring</item>
+        <item>Cleaning</item>
+        <item>Maintenance</item>
+        <item>Car Wash</item>
+        <item>Planner</item>
+        <item>Plumber</item>
+        <item>Insecticide Spray</item>
+        <item>Painter</item>
+        <item>Builder</item>
+    </array>
+
+    <array name="types">
+        <item>customer</item>
+        <item>Worker</item>
+    </array>
+    <array name="states">
+        <item>In Wait..</item>
+        <item>In Progress..</item>
+        <item>Done</item>
+    </array>
+</resources>

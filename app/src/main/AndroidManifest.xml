@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.smartworker.smartworker">
+
+    <dist:module dist:instant="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".AddPrice"></activity>
+        <activity android:name=".orders.ShowOrderBeforAdd" />
+        <activity android:name=".orders.OptionOrder" />
+        <activity android:name=".Map" />
+        <activity android:name=".orders.Orders" />
+        <activity android:name=".account.EditProfile" />
+        <activity android:name=".account.Profile" />
+        <activity android:name=".orders.ShowOrder" />
+        <activity android:name=".login.RegisterWorker" />
+        <activity android:name=".login.RegisterCustomer" />
+        <activity android:name=".login.CreatePassword" />
+        <activity android:name=".login.CheckPassword" />
+        <activity android:name=".login.CheckCode" />
+        <activity android:name=".login.LoginCategories" />
+        <activity android:name=".AboutUs" />
+        <activity android:name=".login.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

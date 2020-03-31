@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/edit"
+        android:title="Edit"
+        android:icon="@drawable/ic_edit"
+        />
+
+    <item android:id="@+id/my_massage"
+        android:title="Massage"
+        android:icon="@drawable/ic_my_massage"
+        />
+    <item android:id="@+id/my_orders"
+        android:title="Orders"
+        android:icon="@drawable/ic_my_orders"
+        />
+    <item android:id="@+id/remove"
+        android:icon="@drawable/ic_remov_account"
+        android:title="Remove Account"
+
+        />
+    <item android:id="@+id/sign_out"
+        android:title="Sign out"
+        android:icon="@drawable/ic_remove_account"
+        />
+</menu>
