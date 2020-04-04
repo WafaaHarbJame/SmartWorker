@@ -1,80 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".orders.ShowOrder"
     android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    >
+    android:orientation="vertical"
+    tools:context=".orders.ShowOrder">
+
     <RelativeLayout
+        android:id="@+id/nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:id="@+id/nav"
-        >
+        android:orientation="horizontal">
+
         <Button
+            android:id="@+id/back_customer"
             android:layout_width="11dp"
             android:layout_height="17dp"
-            android:background="@drawable/ic_back"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:id="@+id/back_customer"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_back" />
+
         <Button
+            android:id="@+id/back_worker"
             android:layout_width="11dp"
             android:layout_height="17dp"
-            android:background="@drawable/ic_back"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:id="@+id/back_worker"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_back" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/sw"
-            android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/sw" />
+
         <Button
+            android:id="@+id/profile"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/ic_profile_blou"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:id="@+id/profile"
-            />
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ic_profile_blou" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorLine"
+        android:layout_alignBottom="@id/nav"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@id/nav"/>
+        android:background="@color/colorLine" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Details"
-        android:textSize="28dp"
-        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        />
+        android:text="Order Details"
+        android:textSize="28dp"
+        android:textStyle="bold" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
-        android:layout_marginRight="@dimen/margin_left"
         android:layout_marginTop="10dp"
-        >
+        android:layout_marginRight="@dimen/margin_left"
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,6 +108,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_order_id"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -104,19 +116,17 @@
             android:textColor="#25D9F8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_order_id"
-            />
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,6 +149,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_category"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -146,19 +157,17 @@
             android:textColor="#25D9F8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut0"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_category"
-            />
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -181,6 +190,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_case"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -188,17 +198,15 @@
             android:textColor="#25D9F8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut1"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_case"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -221,6 +229,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_time"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -228,17 +237,15 @@
             android:textColor="#59F32F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut2"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_time"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -261,6 +268,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_date"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -268,98 +276,96 @@
             android:textColor="#59F32F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut3"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_date"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/background_table"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        >
+        android:background="@drawable/background_table"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
+            android:minHeight="40dp"
             android:text="Description"
             android:textColor="#000"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/cut5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/cut5"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/colorLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:background="@color/colorLine" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="00-00-0000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cut5"
-            tools:ignore="MissingConstraints"
             android:id="@+id/tb_description"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:paddingEnd="5dp"
+            android:text="desc"
             />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/background_table"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        >
+        android:background="@drawable/background_table"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
+            android:minHeight="40dp"
             android:text="Images"
             android:textColor="#000"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/cut4"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/cut4"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/colorLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:background="@color/colorLine" />
+
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:id="@+id/tb_image"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_weight="1"
             android:gravity="center"
+            android:padding="5dp"
+            android:paddingEnd="5dp"
             android:src="@drawable/ic_image_defalt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut4"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_image"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_state"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        android:id="@+id/l_state"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -382,6 +388,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_state"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -389,18 +396,16 @@
             android:textColor="#F86625"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut6"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_state"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_price"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        android:id="@+id/l_price"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -423,6 +428,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_price"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -430,18 +436,16 @@
             android:textColor="#F32F4C"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut7"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_price"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_time_accept"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        android:id="@+id/l_time_accept"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -464,6 +468,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_time_accept"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -471,18 +476,16 @@
             android:textColor="#59F32F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut8"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_time_accept"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_date_accept"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        android:id="@+id/l_date_accept"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -505,6 +508,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_date_accept"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -512,18 +516,16 @@
             android:textColor="#59F32F"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut9"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_date_accept"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_command"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/background_table"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
-        android:id="@+id/l_command"
-        >
+        android:background="@drawable/background_table">
 
         <TextView
             android:layout_width="wrap_content"
@@ -546,82 +548,86 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/tb_command"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="00-00-0000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cut10"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/tb_command"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        >
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp">
+
         <Button
+            android:id="@+id/btn_add_price"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Add Price"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:gravity="center"
             android:background="@drawable/button_blou"
+            android:gravity="center"
+            android:text="Add Price"
+            android:textAllCaps="false"
             android:textColor="#fff"
-            android:id="@+id/btn_add_price"
-            />
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/action_but"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <Button
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:text="Accept"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                android:gravity="center"
-                android:background="@drawable/button_green"
-                android:textColor="#fff"
                 android:id="@+id/btn_accept"
-                />
-            <Button
                 android:layout_width="150dp"
                 android:layout_height="60dp"
+                android:background="@drawable/button_green"
+                android:gravity="center"
+                android:text="Accept"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_remove"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/button_red"
+                android:gravity="center"
                 android:text="Remove"
+                android:textAllCaps="false"
+                android:textColor="#fff"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:textAllCaps="false"
-                android:gravity="center"
-                android:background="@drawable/button_red"
-                android:textColor="#fff"
-                android:id="@+id/btn_remove"
-                android:layout_marginLeft="30dp"
 
                 />
         </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Remove"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:gravity="center"
-            android:background="@drawable/button_red"
-            android:textColor="#fff"
-            android:id="@+id/btn_remove_by_customer"
-            />
+
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_remove_by_customer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/button_red"
+        android:gravity="center"
+        android:text="Remove"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+

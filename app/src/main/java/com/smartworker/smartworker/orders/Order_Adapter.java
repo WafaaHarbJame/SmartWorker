@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartworker.smartworker.Main_Adapter;
 import com.smartworker.smartworker.R;

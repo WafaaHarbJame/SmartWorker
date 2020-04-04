@@ -5,10 +5,9 @@ import java.sql.Time;
 
 public class Order {
 
-    int id, user_id, worker_id, catagoris, cases, price, state,acc;
-    String description, command, time_add, time_accept, date_add, date_accept;
+    int id, user_id, worker_id, catagoris, cases, price, state, acc;
+    String description, command, time_add, time_accept, date_add, date_accept, job_name, imageUri;
     byte[] image;
-
 
 
     public Order() {
@@ -60,9 +59,17 @@ public class Order {
         return catagoris;
     }
 
-    public void setCatagoris(int catagoris) {
-        this.catagoris = catagoris;
+    public void setCatagoris(int jobId) {
+        this.catagoris = jobId;
     }
+
+//    public String getCategoryName() {
+//        return job_name;
+//    }
+//
+//    public void setCategoryName(String jobName) {
+//        this.job_name = jobName;
+//    }
 
     public int getCases() {
         return cases;
@@ -136,12 +143,20 @@ public class Order {
         this.date_accept = date_accept;
     }
 
-    public byte[] getImage() {
-        return image;
+//    public byte[] getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(byte[] image) {
+//        this.image = image;
+//    }
+
+    public String getImageUri() {
+        return imageUri;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImageUri(String image) {
+        this.imageUri = image;
     }
 
     public int getAcc() {

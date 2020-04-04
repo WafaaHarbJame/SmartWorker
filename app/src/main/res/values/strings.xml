@@ -27,6 +27,30 @@
         <item>Builder</item>
     </array>
 
+    <array name="cities">
+        <item>AL Houfuf</item>
+        <item>Abha</item>
+        <item>Al Qaseem</item>
+        <item>AlBaha</item>
+        <item>AlHasa</item>
+        <item>AlKhober</item>
+        <item>Dammam</item>
+        <item>Hail</item>
+        <item>Jazan</item>
+        <item>Jeddah</item>
+        <item>Jouf</item>
+        <item>Jubail</item>
+        <item>Makkah</item>
+        <item>Medina</item>
+        <item>Najran</item>
+        <item>Riyadh</item>
+        <item>Tabuk</item>
+        <item>Tief</item>
+        <item>Yanbu</item>
+
+    </array>
+
+
     <array name="types">
         <item>customer</item>
         <item>Worker</item>
@@ -36,4 +60,7 @@
         <item>In Progress..</item>
         <item>Done</item>
     </array>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_my_worker_location">Map</string>
+    <string name="no_workers_in_this_city">No workers in this city</string>
 </resources>

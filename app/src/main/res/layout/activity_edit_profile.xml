@@ -38,15 +38,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         >
+
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ed_customer_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/customer"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#25D9F8"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/ed_customer_image"
-            />
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:src="@drawable/customer"
+            app:civ_border_color="#25D9F8"
+            app:civ_border_width="2dp" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

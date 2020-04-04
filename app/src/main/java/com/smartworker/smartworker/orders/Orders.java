@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -55,6 +56,7 @@ public class Orders extends AppCompatActivity {
         list = new ArrayList<Order>();
         list = db_orders.getALLOrders(id,membership);
 
+        Log.e("wgetMEMBER_SHIP","getMEMBER_SHIP"+"\n "+ db_user.getMember(id));
 
         total = (TextView)findViewById(R.id.total);
         wait = (TextView)findViewById(R.id.wait);

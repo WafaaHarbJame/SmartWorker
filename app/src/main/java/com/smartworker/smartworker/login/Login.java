@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartworker.smartworker.AppConstants;
+import com.smartworker.smartworker.SharedPManger;
 import com.smartworker.smartworker.Utile;
 import com.smartworker.smartworker.db.DbOperation_Jops;
 import com.smartworker.smartworker.db.DbOperation_Users;
@@ -35,6 +38,8 @@ public class Login extends AppCompatActivity {
     boolean log=false;
     boolean show = false;
     byte [] jop_images = new byte[]{};
+    SharedPManger sharedPManger;
+    boolean isAdded=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +52,67 @@ public class Login extends AppCompatActivity {
         rigester = findViewById(R.id.rigester);
         show_password = findViewById(R.id.showpassword);
         sign_in = findViewById(R.id.sign_in);
+        sharedPManger=new SharedPManger(Login.this);
+        isAdded=sharedPManger.getDataBool(AppConstants.ISADDED);
 
 
         db_j = new DbOperation_Jops(this);
 
+        String[] cities = getResources().getStringArray(R.array.cities);
+
+        if(!isAdded){
+            //db_j.insert_cities(cities);
+            db_j.insert_new_cities(cities[0],25.379867, 49.589627);
+            db_j.insert_new_cities(cities[1],18.244281, 42.510655);
+            db_j.insert_new_cities(cities[2],26.671084, 43.556980);
+            db_j.insert_new_cities(cities[3],20.023770, 41.471115);
+            db_j.insert_new_cities(cities[4],22.163761, 49.484323);
+            db_j.insert_new_cities(cities[5],26.214936, 50.193902);
+            db_j.insert_new_cities(cities[6],26.417236, 50.087306);
+            db_j.insert_new_cities(cities[7],27.516058, 41.717414);
+            db_j.insert_new_cities(cities[8],16.888297, 42.569921);
+            db_j.insert_new_cities(cities[9],21.488230, 39.189211);
+            db_j.insert_new_cities(cities[10],17.402305, 42.859104);
+            db_j.insert_new_cities(cities[11],26.962059, 49.572896);
+            db_j.insert_new_cities(cities[12],21.388653, 39.860975);
+            db_j.insert_new_cities(cities[13],24.525368, 39.588727);
+            db_j.insert_new_cities(cities[14],17.566339, 44.229941);
+            db_j.insert_new_cities(cities[15],24.722437, 46.682487);
+            db_j.insert_new_cities(cities[16],28.384184, 36.566934);
+            db_j.insert_new_cities(cities[17],21.279609, 40.432431);
+            db_j.insert_new_cities(cities[18],24.019599, 38.191060
+
+            );
+
+            isAdded=true;
+            sharedPManger.SetData(AppConstants.ISADDED,true);
+        }
+
+//        db_j.insert_city(cities[0]);
+//        db_j.insert_city(cities[1]);
+//        db_j.insert_city(cities[2]);
+//        db_j.insert_city(cities[3]);
+//        db_j.insert_city(cities[4]);
+//        db_j.insert_city(cities[5]);
+//        db_j.insert_city(cities[6]);
+//        db_j.insert_city(cities[7]);
+//        db_j.insert_city(cities[8]);
+//        db_j.insert_city(cities[9]);
+//        db_j.insert_city(cities[10]);
+//        db_j.insert_city(cities[11]);
+//        db_j.insert_city(cities[12]);
+//        db_j.insert_city(cities[13]);
+//        db_j.insert_city(cities[14]);
+//        db_j.insert_city(cities[15]);
+//        db_j.insert_city(cities[16]);
+//        db_j.insert_city(cities[17]);
+//        db_j.insert_city(cities[18]);
+
+
+
+
         if(db_j.getSize() < 12){    // later will create activity to add jops
-
             String[] albums = getResources().getStringArray(R.array.fields);
-
             ImageView iv = new ImageView(this);
             iv.setImageResource(R.drawable.i1);
             Bitmap bitmap1 = ((BitmapDrawable)iv.getDrawable()).getBitmap();

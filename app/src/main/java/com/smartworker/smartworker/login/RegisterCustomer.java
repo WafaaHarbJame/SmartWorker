@@ -1,5 +1,6 @@
 package com.smartworker.smartworker.login;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,10 +17,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.smartworker.smartworker.Utile;
 import com.smartworker.smartworker.db.DbOperation_Users;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.R;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,6 +56,7 @@ public class RegisterCustomer extends AppCompatActivity {
         SIGN_UP = (Button) findViewById(R.id.sign_up);
         IMAGE_SELECT = (ImageView)findViewById(R.id.select_image);
         IMAGE_USER = (CircleImageView)findViewById(R.id.customer_image);
+
 
 
         location = "Saudi Arabia,Riyadh,45/55";     //will tack from google map
@@ -240,6 +248,8 @@ public class RegisterCustomer extends AppCompatActivity {
         if(requestCode == SELECT_PHOTO && resultCode == RESULT_OK && data != null){
             Uri pick_image = data.getData();
             IMAGE_USER.setImageURI(pick_image);
+
+
         }
     }
 

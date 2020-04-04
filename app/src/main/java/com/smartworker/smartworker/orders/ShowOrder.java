@@ -1,9 +1,11 @@
 package com.smartworker.smartworker.orders;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,60 +24,61 @@ import com.smartworker.smartworker.db.DbOperation_Users;
 
 public class ShowOrder extends AppCompatActivity {
 
-    int order_id,user_id;
+    int order_id, user_id;
     boolean goMain = false;
     int acc = 0;
     String state;
-    TextView tb_category,tb_case,tb_time,tb_date,tb_description,tb_price,tb_time_accept,tb_date_accept,tb_state,tb_command,tb_order_id;
-    ConstraintLayout l_state,l_price,l_time_accept,l_date_accept,l_command;
-    Button btn_back_customer,btn_back_worker,btn_add_price,btn_accept,btn_remove,btn_remove_by_customer;
+    TextView tb_category, tb_case, tb_time, tb_date, tb_description, tb_price, tb_time_accept, tb_date_accept, tb_state, tb_command, tb_order_id;
+    ConstraintLayout l_state, l_price, l_time_accept, l_date_accept, l_command;
+    Button btn_back_customer, btn_back_worker, btn_add_price, btn_accept, btn_remove, btn_remove_by_customer;
     LinearLayout action_but;
     ImageView tb_image;
     Order order;
     DbOperation_Orders db_order;
     DbOperation_Jops db_jop;
     DbOperation_Users db_user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_order);
 
-        order_id = getIntent().getIntExtra("order_id",-1);
-        user_id = getIntent().getIntExtra("user_id",-1);
-        goMain = getIntent().getBooleanExtra("goMain",false);
+        order_id = getIntent().getIntExtra("order_id", -1);
+        user_id = getIntent().getIntExtra("user_id", -1);
+        goMain = getIntent().getBooleanExtra("goMain", false);
 
-        if(order_id == -1){
+        if (order_id == -1) {
             onBackPressed();
-            Toast.makeText(getApplicationContext(),"NOT FOUND",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "NOT FOUND", Toast.LENGTH_SHORT).show();
         }
-        tb_category = (TextView)findViewById(R.id.tb_category);
-        tb_case = (TextView)findViewById(R.id.tb_case);
-        tb_time = (TextView)findViewById(R.id.tb_time);
-        tb_date = (TextView)findViewById(R.id.tb_date);
-        tb_description = (TextView)findViewById(R.id.tb_description);
+        tb_category = findViewById(R.id.tb_category);
+        tb_case = findViewById(R.id.tb_case);
+        tb_time = findViewById(R.id.tb_time);
+        tb_date = findViewById(R.id.tb_date);
+        tb_description = findViewById(R.id.tb_description);
 
-        tb_price = (TextView)findViewById(R.id.tb_price);
-        tb_time_accept = (TextView)findViewById(R.id.tb_time_accept);
-        tb_date_accept = (TextView)findViewById(R.id.tb_date_accept);
-        tb_state = (TextView)findViewById(R.id.tb_state);
-        tb_command = (TextView)findViewById(R.id.tb_command);
-        tb_order_id = (TextView)findViewById(R.id.tb_order_id);
+        tb_price = findViewById(R.id.tb_price);
+        tb_time_accept = findViewById(R.id.tb_time_accept);
+        tb_date_accept = findViewById(R.id.tb_date_accept);
+        tb_state = findViewById(R.id.tb_state);
+        tb_command = findViewById(R.id.tb_command);
+        tb_order_id = findViewById(R.id.tb_order_id);
 
-        tb_image = (ImageView)findViewById(R.id.tb_image);
-        btn_back_customer = (Button)findViewById(R.id.back_customer);
-        btn_back_worker = (Button)findViewById(R.id.back_worker);
-        btn_add_price = (Button)findViewById(R.id.btn_add_price);
-        btn_accept = (Button)findViewById(R.id.btn_accept);
-        btn_remove = (Button)findViewById(R.id.btn_remove);
-        btn_remove_by_customer = (Button)findViewById(R.id.btn_remove_by_customer);
+        tb_image = findViewById(R.id.tb_image);
+        btn_back_customer = findViewById(R.id.back_customer);
+        btn_back_worker = findViewById(R.id.back_worker);
+        btn_add_price = findViewById(R.id.btn_add_price);
+        btn_accept = findViewById(R.id.btn_accept);
+        btn_remove = findViewById(R.id.btn_remove);
+        btn_remove_by_customer = findViewById(R.id.btn_remove_by_customer);
 
-        l_state = (ConstraintLayout)findViewById(R.id.l_state);
-        l_price = (ConstraintLayout)findViewById(R.id.l_price);
-        l_time_accept = (ConstraintLayout)findViewById(R.id.l_time_accept);
-        l_date_accept = (ConstraintLayout)findViewById(R.id.l_date_accept);
-        l_command = (ConstraintLayout)findViewById(R.id.l_command);
+        l_state = findViewById(R.id.l_state);
+        l_price = findViewById(R.id.l_price);
+        l_time_accept = findViewById(R.id.l_time_accept);
+        l_date_accept = findViewById(R.id.l_date_accept);
+        l_command = findViewById(R.id.l_command);
 
-        action_but = (LinearLayout)findViewById(R.id.action_but);
+        action_but = findViewById(R.id.action_but);
 
         db_order = new DbOperation_Orders(this);
         db_jop = new DbOperation_Jops(this);
@@ -97,25 +100,27 @@ public class ShowOrder extends AppCompatActivity {
         order = db_order.getOrder(order_id);
         acc = order.getAcc();
 
-        tb_order_id.setText(order_id+"");
-        tb_category.setText(db_jop.getJopNames(order.getCatagoris()));
-        if(order.getCases() == 1){
+        String jobName = db_jop.getJopNames(order.getCatagoris());
+        tb_order_id.setText(String.valueOf(order_id));
+        tb_category.setText(jobName);
+        if (order.getCases() == 1) {
             tb_case.setText("Urgent");
-        }else {
+        } else {
             tb_case.setText("Scheduler");
         }
         tb_time.setText(order.getTime_add());
         tb_date.setText(order.getDate_add());
         tb_description.setText(order.getDescription());
-        tb_image.setImageBitmap(Utile.getImage(order.getImage()));
+
+        tb_image.setImageURI(Uri.parse(order.getImageUri()));
 
 
-        if(db_user.getMember(user_id) == 0 && acc == 0 && order.getState() == 1){
+        if (db_user.getMember(user_id) == 0 && acc == 0 && order.getState() == 1) {
             btn_remove_by_customer.setVisibility(View.VISIBLE);
             btn_back_customer.setVisibility(View.VISIBLE);
             state = "In Wait..";
             tb_state.setText(state);
-        }else if(db_user.getMember(user_id) == 0 && acc == 1 && order.getState() == 1){
+        } else if (db_user.getMember(user_id) == 0 && acc == 1 && order.getState() == 1) {
             btn_back_customer.setVisibility(View.VISIBLE);
             btn_accept.setVisibility(View.VISIBLE);
             btn_remove.setVisibility(View.VISIBLE);
@@ -123,55 +128,55 @@ public class ShowOrder extends AppCompatActivity {
             l_time_accept.setVisibility(View.VISIBLE);
             l_date_accept.setVisibility(View.VISIBLE);
             l_command.setVisibility(View.VISIBLE);
-            tb_price.setText(order.getPrice()+"");
+            tb_price.setText(order.getPrice() + "");
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
             state = "In Wait..";
             tb_state.setText(state);
-        }else if(db_user.getMember(user_id) == 0 && order.getState() == 2){
+        } else if (db_user.getMember(user_id) == 0 && order.getState() == 2) {
             btn_back_customer.setVisibility(View.VISIBLE);
             l_price.setVisibility(View.VISIBLE);
             l_time_accept.setVisibility(View.VISIBLE);
             l_date_accept.setVisibility(View.VISIBLE);
             l_command.setVisibility(View.VISIBLE);
-            tb_price.setText(order.getPrice()+"");
+            tb_price.setText(order.getPrice() + "");
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
             state = "In Progress..";
             tb_state.setText(state);
-        }else if(db_user.getMember(user_id) == 1 && acc == 0 && order.getState() == 1){
+        } else if (db_user.getMember(user_id) == 1 && acc == 0 && order.getState() == 1) {
             btn_back_worker.setVisibility(View.VISIBLE);
             btn_add_price.setVisibility(View.VISIBLE);
             state = "In Wait..";
             tb_state.setText(state);
-        }else if(db_user.getMember(user_id) == 1 && acc == 1 && order.getState() == 1){
+        } else if (db_user.getMember(user_id) == 1 && acc == 1 && order.getState() == 1) {
             btn_back_worker.setVisibility(View.VISIBLE);
             btn_remove_by_customer.setVisibility(View.VISIBLE);
             l_price.setVisibility(View.VISIBLE);
             l_time_accept.setVisibility(View.VISIBLE);
             l_date_accept.setVisibility(View.VISIBLE);
             l_command.setVisibility(View.VISIBLE);
-            tb_price.setText(order.getPrice()+"");
+            tb_price.setText(order.getPrice() + "");
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
             state = "In Wait..";
             tb_state.setText(state);
-        }else if(db_user.getMember(user_id) == 1 && order.getState() == 2){
+        } else if (db_user.getMember(user_id) == 1 && order.getState() == 2) {
             btn_back_worker.setVisibility(View.VISIBLE);
             l_price.setVisibility(View.VISIBLE);
             l_time_accept.setVisibility(View.VISIBLE);
             l_date_accept.setVisibility(View.VISIBLE);
             l_command.setVisibility(View.VISIBLE);
-            tb_price.setText(order.getPrice()+"");
+            tb_price.setText(order.getPrice() + "");
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
             state = "In Progress..";
             tb_state.setText(state);
-        }else if(order.getState() == 3){
+        } else if (order.getState() == 3) {
             btn_add_price.setVisibility(View.INVISIBLE);
             btn_remove_by_customer.setVisibility(View.INVISIBLE);
             btn_accept.setVisibility(View.INVISIBLE);
@@ -180,7 +185,7 @@ public class ShowOrder extends AppCompatActivity {
             l_time_accept.setVisibility(View.VISIBLE);
             l_date_accept.setVisibility(View.VISIBLE);
             l_command.setVisibility(View.VISIBLE);
-            tb_price.setText(order.getPrice()+"");
+            tb_price.setText(order.getPrice() + "");
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
@@ -191,11 +196,11 @@ public class ShowOrder extends AppCompatActivity {
         btn_back_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(goMain){
+                if (goMain) {
                     Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                    in.putExtra("user_id",order.getUser_id());
+                    in.putExtra("user_id", order.getUser_id());
                     startActivity(in);
-                }else {
+                } else {
                     onBackPressed();
                 }
 
@@ -212,8 +217,8 @@ public class ShowOrder extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), AddPrice.class);
-                in.putExtra("order_id",db_order.getOrderId(order_id));
-                in.putExtra("user_id",user_id);
+                in.putExtra("order_id", db_order.getOrderId(order_id));
+                in.putExtra("user_id", user_id);
                 startActivity(in);
             }
         });
@@ -222,7 +227,7 @@ public class ShowOrder extends AppCompatActivity {
             public void onClick(View v) {
                 db_order.deleteOrder(order_id);
                 Intent in = new Intent(getApplicationContext(), Orders.class);
-                in.putExtra("user_id",user_id);
+                in.putExtra("user_id", user_id);
                 startActivity(in);
             }
         });
@@ -231,7 +236,7 @@ public class ShowOrder extends AppCompatActivity {
             public void onClick(View v) {
                 db_order.deleteOrder(order_id);
                 Intent in = new Intent(getApplicationContext(), Orders.class);
-                in.putExtra("user_id",user_id);
+                in.putExtra("user_id", user_id);
                 startActivity(in);
             }
         });
@@ -240,14 +245,13 @@ public class ShowOrder extends AppCompatActivity {
             public void onClick(View v) {
                 db_order.UpdateToProgress(order_id);
                 Intent in = new Intent(getApplicationContext(), ShowOrder.class);
-                in.putExtra("order_id",order_id);
-                in.putExtra("user_id",user_id);
+                in.putExtra("order_id", order_id);
+                in.putExtra("user_id", user_id);
                 startActivity(in);
             }
         });
 
 
-
-
     }
+
 }

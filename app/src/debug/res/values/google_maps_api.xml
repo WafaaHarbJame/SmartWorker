@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=00:A9:05:1A:33:F2:6C:73:72:7B:3E:13:65:B0:CC:F4:AD:61:FB:00%3Bcom.smartworker.smartworker
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.smartworker.smartworker
+
+    SHA-1 certificate fingerprint:
+    00:A9:05:1A:33:F2:6C:73:72:7B:3E:13:65:B0:CC:F4:AD:61:FB:00
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCXMX449ltlGO-Hn27-Q4Avg5aBvqRw8O8</string>
+</resources>

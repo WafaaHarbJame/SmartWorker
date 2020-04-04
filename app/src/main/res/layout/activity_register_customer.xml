@@ -119,7 +119,7 @@
         android:drawableLeft="@drawable/ic_newpassword"
         android:paddingLeft="20dp"
         android:paddingRight="40dp"
-        android:inputType="text"
+        android:inputType="textPassword"
         />
 
     <EditText
@@ -140,7 +140,7 @@
         android:drawableRight="@drawable/ic_check_false"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:inputType="text"
+        android:inputType="textPassword"
         />
 
     <Button
