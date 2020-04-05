@@ -31,7 +31,7 @@ import java.util.List;
 
 public class Orders extends AppCompatActivity {
 
-    int id;
+    int user_id;
     int membership;
     TextView total,wait,progress,done;
     Button btn_profile,sign_out;
@@ -41,6 +41,7 @@ public class Orders extends AppCompatActivity {
     DbOperation_Users db_user;
     DbOperation_Orders db_orders;
 
+
     int Item_postion;
 
     @Override
@@ -48,15 +49,15 @@ public class Orders extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
 
-        id = getIntent().getIntExtra("user_id",0);
+        user_id = getIntent().getIntExtra("user_id",0);
         db_user = new DbOperation_Users(this);
         db_orders = new DbOperation_Orders(this);
-        membership = db_user.getMember(id);
+        membership = db_user.getMember(user_id);
 
         list = new ArrayList<Order>();
-        list = db_orders.getALLOrders(id,membership);
+        list = db_orders.getALLOrders(user_id,membership);
 
-        Log.e("wgetMEMBER_SHIP","getMEMBER_SHIP"+"\n "+ db_user.getMember(id));
+        Log.e("wgetMEMBER_SHIP","getMEMBER_SHIP"+"\n "+ db_user.getMember(user_id));
 
         total = (TextView)findViewById(R.id.total);
         wait = (TextView)findViewById(R.id.wait);
@@ -100,7 +101,7 @@ public class Orders extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), Profile.class);
-                in.putExtra("user_id",id);
+                in.putExtra("user_id",user_id);
                 startActivity(in);
             }
         });
@@ -114,7 +115,7 @@ public class Orders extends AppCompatActivity {
 
     }
     public void onBackPressed() {
-        int member = db_user.getMember(id);
+        int member = db_user.getMember(user_id);
         if (member != 0) {
             onBackPressedMy();
         } else {
@@ -156,7 +157,7 @@ public class Orders extends AppCompatActivity {
                 order = list.get(Item_postion);
                 Intent in = new Intent(getApplicationContext(),ShowOrder.class);
                 in.putExtra("order_id",order.getId());
-                in.putExtra("user_id",id);
+                in.putExtra("user_id",user_id);
                 startActivity(in);
                 break;
             case R.id.delete:

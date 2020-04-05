@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -32,7 +33,6 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.smartworker.smartworker.login.RegisterWorker;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,6 +45,7 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
     private GoogleMap mMap;
     private Button mSaveLocation;
     String location;
+    private FloatingActionButton mMyLocationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +55,30 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mSaveLocation = findViewById(R.id.saveLocation);
+        mMyLocationButton = findViewById(R.id.myLocationButton);
 
         getMyLocation();
+        mMyLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getMyLocation();
+            }
+        });
 
         mSaveLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MyWorkerLocationActivity.this, RegisterWorker.class);
-                Toast.makeText(MyWorkerLocationActivity.this, "mSaveLocation"+latitude+longitude, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyWorkerLocationActivity.this, "mSaveLocation" + latitude + longitude, Toast.LENGTH_SHORT).show();
                 Bundle addBundle = new Bundle();
-                addBundle.putDouble("latitude",latitude);
-                addBundle.putDouble("longitude",longitude);
+                addBundle.putDouble("latitude", latitude);
+                addBundle.putDouble("longitude", longitude);
+                addBundle.putString("location",location);
                 intent.putExtras(addBundle);
-                intent.putExtra(AppConstants.latitude,latitude);
-                intent.putExtra("longitude",longitude);
-                intent.putExtra(AppConstants.location,location);
-                setResult(Activity.RESULT_OK,intent);
+                intent.putExtra(AppConstants.latitude, latitude);
+                intent.putExtra("longitude", longitude);
+                intent.putExtra("location", location);
+                setResult(Activity.RESULT_OK, intent);
                 finish();
 
             }
@@ -87,8 +96,6 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
 //
 //            }
 //        });
-
-
 
 
     }
@@ -112,19 +119,16 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
             public void onMapClick(LatLng latLng) {
                 mMap.clear();
                 createMarker(latLng.latitude, latLng.longitude, "markar", "", R.drawable.ic_map_customer);
-                latitude=latLng.latitude;
-                longitude=latLng.longitude;
+                latitude = latLng.latitude;
+                longitude = latLng.longitude;
 
-                getAddress(MyWorkerLocationActivity.this,latLng.latitude,latLng.longitude);
+                getAddress(MyWorkerLocationActivity.this, latLng.latitude, latLng.longitude);
 
 
             }
         });
 
     }
-
-
-
 
 
     private void getMyLocation() {
@@ -143,9 +147,9 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
 
                             LatLng start = new LatLng(location.getLatitude(), location.getLongitude());
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(start, 15));
-                               latitude = location.getLatitude();
+                            latitude = location.getLatitude();
                             longitude = location.getLongitude();
-                              getAddress(MyWorkerLocationActivity.this, latitude, longitude);
+                            getAddress(MyWorkerLocationActivity.this, latitude, longitude);
 
 
                         }
@@ -165,7 +169,7 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
         }).withErrorListener(new PermissionRequestErrorListener() {
             @Override
             public void onError(DexterError error) {
-               // Toast.makeText(MyWorkerLocationActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MyWorkerLocationActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
 
             }
         }).onSameThread().check();
@@ -192,13 +196,12 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
             add = add + "," + obj.getAdminArea();
 //            add = add + "\n" + obj.getSubAdminArea();
             add = add + "," + obj.getLocality();
-            Log.e("tag","add"+add);
-            if(obj.getLocality().isEmpty()){
-                location=obj.getCountryName();
+            Log.e("tag", "add" + add);
+            if (obj.getLocality().isEmpty()) {
+                location = obj.getCountryName();
 //
-            }
-            else {
-                location=obj.getCountryName()+","+obj.getLocality();
+            } else {
+                location = obj.getCountryName() + "," + obj.getLocality();
 
             }
 //
@@ -206,8 +209,8 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
 
             return add;
         } catch (Exception e) {
-          //  e.printStackTrace();
-          //Toast.makeText(this,"no Address", Toast.LENGTH_SHORT).show();
+            //  e.printStackTrace();
+            //Toast.makeText(this,"no Address", Toast.LENGTH_SHORT).show();
             return "no Address";
         }
     }

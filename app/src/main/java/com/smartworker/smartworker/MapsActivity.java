@@ -1,12 +1,8 @@
 package com.smartworker.smartworker;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.location.Location;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,15 +29,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.karumi.dexter.listener.single.PermissionListener;
+import com.smartworker.smartworker.account.Profile;
 import com.smartworker.smartworker.db.DbOperation_Jops;
 import com.smartworker.smartworker.db.DbOperation_Users;
-import com.smartworker.smartworker.login.Jop;
-import com.smartworker.smartworker.login.RegisterWorker;
 import com.smartworker.smartworker.login.User;
 import com.smartworker.smartworker.orders.OptionOrder;
 
@@ -75,6 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     int position;
     private GoogleMap mMap;
     private Spinner mCity;
+    private Button mProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btn_confirm = (Button) findViewById(R.id.confirm);
         btn_confirm.setVisibility(View.INVISIBLE);
         db_user = new DbOperation_Users(this);
+        mProfile = findViewById(R.id.profile);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -124,6 +120,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityAdapter.notifyDataSetChanged();
         mCity.setAdapter(cityAdapter);
+        mProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getApplicationContext(), Profile.class);
+                in.putExtra("user_id", user_id);
+                startActivity(in);
+            }
+        });
 
 //        workers_list.clear();
         //  markersArray.clear();

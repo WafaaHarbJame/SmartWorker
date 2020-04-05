@@ -378,11 +378,12 @@ public class RegisterWorker extends AppCompatActivity {
             //Write your code if there's no result
             longitude_d = data.getExtras().getDouble("latitude_d");
             latitude_d = data.getExtras().getDouble("latitude");
-            location = data.getStringExtra(AppConstants.location);
+            location = data.getStringExtra("location");
 
             Bundle extras = data.getExtras();
             latitude_d = extras.getDouble("latitude");
             longitude_d = extras.getDouble("longitude");
+            location = extras.getString("location");
 
             Toast.makeText(this, "onActivityResult" + latitude_d, Toast.LENGTH_SHORT).show();
             location = location;

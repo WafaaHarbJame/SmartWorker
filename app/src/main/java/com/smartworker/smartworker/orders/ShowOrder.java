@@ -37,6 +37,7 @@ public class ShowOrder extends AppCompatActivity {
     DbOperation_Orders db_order;
     DbOperation_Jops db_jop;
     DbOperation_Users db_user;
+    int membership;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,11 @@ public class ShowOrder extends AppCompatActivity {
 
         order_id = getIntent().getIntExtra("order_id", -1);
         user_id = getIntent().getIntExtra("user_id", -1);
+
         goMain = getIntent().getBooleanExtra("goMain", false);
+        db_user = new DbOperation_Users(this);
+
+        membership = db_user.getMember(user_id);
 
         if (order_id == -1) {
             onBackPressed();
@@ -84,21 +89,22 @@ public class ShowOrder extends AppCompatActivity {
         db_jop = new DbOperation_Jops(this);
         db_user = new DbOperation_Users(this);
 
-        btn_back_worker.setVisibility(View.INVISIBLE);
-        btn_add_price.setVisibility(View.INVISIBLE);
-        btn_remove_by_customer.setVisibility(View.INVISIBLE);
-        btn_back_customer.setVisibility(View.INVISIBLE);
-        btn_accept.setVisibility(View.INVISIBLE);
-        btn_remove.setVisibility(View.INVISIBLE);
+        btn_back_worker.setVisibility(View.GONE);
+        btn_add_price.setVisibility(View.GONE);
+        btn_remove_by_customer.setVisibility(View.GONE);
+        btn_back_customer.setVisibility(View.GONE);
+        btn_accept.setVisibility(View.GONE);
+        btn_remove.setVisibility(View.GONE);
 
-        l_price.setVisibility(View.INVISIBLE);
-        l_time_accept.setVisibility(View.INVISIBLE);
-        l_date_accept.setVisibility(View.INVISIBLE);
-        l_command.setVisibility(View.INVISIBLE);
+        l_price.setVisibility(View.GONE);
+        l_time_accept.setVisibility(View.GONE);
+        l_date_accept.setVisibility(View.GONE);
+        l_command.setVisibility(View.GONE);
 
         order = new Order();
         order = db_order.getOrder(order_id);
         acc = order.getAcc();
+
 
         String jobName = db_jop.getJopNames(order.getCatagoris());
         tb_order_id.setText(String.valueOf(order_id));
@@ -111,9 +117,9 @@ public class ShowOrder extends AppCompatActivity {
         tb_time.setText(order.getTime_add());
         tb_date.setText(order.getDate_add());
         tb_description.setText(order.getDescription());
-
-        tb_image.setImageURI(Uri.parse(order.getImageUri()));
-
+        if(order.getImageUri()!=null) {
+            tb_image.setImageURI(Uri.parse(order.getImageUri()));
+        }
 
         if (db_user.getMember(user_id) == 0 && acc == 0 && order.getState() == 1) {
             btn_remove_by_customer.setVisibility(View.VISIBLE);
@@ -177,10 +183,10 @@ public class ShowOrder extends AppCompatActivity {
             state = "In Progress..";
             tb_state.setText(state);
         } else if (order.getState() == 3) {
-            btn_add_price.setVisibility(View.INVISIBLE);
-            btn_remove_by_customer.setVisibility(View.INVISIBLE);
-            btn_accept.setVisibility(View.INVISIBLE);
-            btn_remove.setVisibility(View.INVISIBLE);
+            btn_add_price.setVisibility(View.GONE);
+            btn_remove_by_customer.setVisibility(View.GONE);
+            btn_accept.setVisibility(View.GONE);
+            btn_remove.setVisibility(View.GONE);
             l_price.setVisibility(View.VISIBLE);
             l_time_accept.setVisibility(View.VISIBLE);
             l_date_accept.setVisibility(View.VISIBLE);

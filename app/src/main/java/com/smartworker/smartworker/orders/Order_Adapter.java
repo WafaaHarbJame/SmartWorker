@@ -1,6 +1,7 @@
 package com.smartworker.smartworker.orders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,10 +68,18 @@ public class Order_Adapter extends BaseAdapter {
             myView=convertView;
         }
         DbOperation_Jops db_j = new DbOperation_Jops(context);
-        Order o = list.get(position);
+        final Order o = list.get(position);
         ViewHolder vh=(ViewHolder)myView.getTag();
         vh.catagory.setText(db_j.getJopNames(o.getCatagoris()));
         vh.detailes.setText(o.getDescription());
+        myView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(context,ShowOrder.class);
+                in.putExtra("order_id",o.getId());
+                in.putExtra("user_id",o.getUser_id());
+                context.startActivity(in);            }
+        });
         if(o.getState() == 1){
             vh.state.setText("In Wait..");
         }else if(o.getState() == 2){

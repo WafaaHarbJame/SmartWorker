@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".account.EditProfile"
@@ -38,20 +41,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         >
-
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ed_customer_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
             android:src="@drawable/customer"
+            app:civ_border_width="2dp"
             app:civ_border_color="#25D9F8"
-            app:civ_border_width="2dp" />
-
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/ed_customer_image"
+            />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,6 +95,39 @@
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/city"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_toinput"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:scrollbarSize="50dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/my_location"
+        android:background="@drawable/background_toinput"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:hint="Location"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColorHint="#4D000000"
+        android:textColor="#42A5F5"
+        android:drawablePadding="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="8dp"
+        android:drawableLeft="@drawable/ic_add_location_black_24dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="40dp"
+        />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -116,6 +147,7 @@
         android:paddingRight="40dp"
         android:inputType="number"
         />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -229,6 +261,43 @@
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        >
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:id="@+id/lat"
+            android:background="@drawable/background_toinput"
+            android:textSize="20dp"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:textColorHint="#80000000"
+            android:textColor="#80000000"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            />
+
+        <EditText
+            android:id="@+id/lng"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_toinput"
+            android:gravity="center"
+            android:textColor="#80000000"
+            android:textColorHint="#80000000"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="60dp"
@@ -248,3 +317,4 @@
         android:paddingRight="40dp"
         />
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>

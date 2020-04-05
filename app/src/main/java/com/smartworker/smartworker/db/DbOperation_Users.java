@@ -188,7 +188,8 @@ public class DbOperation_Users {
             user.setMAP(cr.getString(8));
             user.setLongitude(cr.getDouble(9));
             user.setLatitude(cr.getDouble(10));
-
+            user.setCity_id(cr.getInt(12));
+            user.setCity_name(cr.getString(13));
             user.setIMAGE(getImage(id));
             if (cr.getInt(5) == 0) {
                 user.setMEMBER_SHIP(cr.getInt(5));

@@ -127,6 +127,7 @@ public class OptionOrder extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
                 in.setType("image/*");
                 startActivityForResult(in, SELECT_PHOTO);
             }

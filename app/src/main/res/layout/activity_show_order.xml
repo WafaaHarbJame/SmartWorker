@@ -559,7 +559,40 @@
             app:layout_constraintStart_toEndOf="@+id/cut10"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="@dimen/margin_left"-->
+<!--        android:layout_marginRight="@dimen/margin_left"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:orientation="horizontal">-->
 
+<!--        <Button-->
+<!--            android:id="@+id/btnn_accept"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:background="@drawable/button_green"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Accept"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="#fff"-->
+<!--            android:textSize="28sp"-->
+<!--            android:textStyle="bold" />-->
+<!--        <Button-->
+<!--            android:id="@+id/btnn_remove"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:background="@drawable/button_red"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Remove"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="#fff"-->
+<!--            android:textSize="28sp"-->
+<!--            android:textStyle="bold"-->
+
+<!--            />-->
+<!--    </LinearLayout>-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -622,6 +655,8 @@
         android:layout_height="60dp"
         android:background="@drawable/button_red"
         android:gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Remove"
         android:textAllCaps="false"
         android:textColor="#fff"

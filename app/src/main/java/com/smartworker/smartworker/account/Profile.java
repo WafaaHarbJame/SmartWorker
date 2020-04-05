@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,7 @@ import java.lang.reflect.Method;
 
 public class Profile extends AppCompatActivity {
 
-    int id ;
+    int user_id ;
     int member;
     boolean show = false;
 
@@ -48,7 +49,8 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        id = getIntent().getIntExtra("user_id",0);
+        user_id = getIntent().getIntExtra("user_id",0);
+        Log.e("user_idProfile","Profile"+user_id);
         show = getIntent().getBooleanExtra("show",false);
         first_name = (TextView)findViewById(R.id.tv_first_name);
         lastname = (TextView)findViewById(R.id.tv_last_name);
@@ -71,8 +73,8 @@ public class Profile extends AppCompatActivity {
         db_user = new DbOperation_Users(this);
         db_jop = new DbOperation_Jops(this);
 
-        user = db_user.getUser_Info(id);
-        member = db_user.getMember(id);
+        user = db_user.getUser_Info(user_id);
+        member = db_user.getMember(user_id);
         if(user.getMEMBER_SHIP() == 0){
             jop.setVisibility(View.INVISIBLE);
             membership.setText("Customer");
@@ -88,6 +90,7 @@ public class Profile extends AppCompatActivity {
         phone.setText(user.getPHONE_NUMBER());
         image_profile.setImageBitmap(Utile.getImage(user.getIMAGE()));
         location.setText(user.getMAP());
+        Log.e("city_id", "city_idDB" + user.getCity_id());
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +113,9 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent iin = new Intent(getApplicationContext(), Orders.class);
-                iin.putExtra("user_id",id);
+                iin.putExtra("user_id",user_id);
+                Log.e("orders_unm","Profile"+user_id);
+
                 startActivity(iin);
             }
         });
@@ -141,7 +146,7 @@ public class Profile extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.edit:
                         Intent in = new Intent(getApplicationContext(), EditProfile.class);
-                        in.putExtra("user_id",id);
+                        in.putExtra("user_id",user_id);
                         startActivity(in);
                         return true;
                     case R.id.my_massage:
@@ -149,7 +154,7 @@ public class Profile extends AppCompatActivity {
                         return true;
                     case R.id.my_orders:
                         Intent iin = new Intent(getApplicationContext(), Orders.class);
-                        iin.putExtra("user_id",id);
+                        iin.putExtra("user_id",user_id);
                         startActivity(iin);
                         return true;
                     case R.id.remove:
@@ -171,14 +176,14 @@ public class Profile extends AppCompatActivity {
 
 
     public void onBackPressedMy() {
-        int member = db_user.getMember(id);
+        int member = db_user.getMember(user_id);
         if(member == 0){
             Intent in = new Intent(getApplicationContext(), MainActivity.class);
-            in.putExtra("user_id",id);
+            in.putExtra("user_id",user_id);
             startActivity(in);
         }else {
             Intent in = new Intent(getApplicationContext(), Orders.class);
-            in.putExtra("user_id",id);
+            in.putExtra("user_id",user_id);
             startActivity(in);
         }
     }
@@ -211,7 +216,7 @@ public class Profile extends AppCompatActivity {
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        db_user.delete(id);
+                        db_user.delete(user_id);
                         Toast.makeText(getApplicationContext(),"Account Deleted",Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(getApplicationContext(), Login.class);
                         startActivity(in);
