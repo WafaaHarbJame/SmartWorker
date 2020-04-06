@@ -68,7 +68,27 @@ public class DbOperation_Users {
             return false;
         }
     }
+    public boolean RestoredPassward(User user) throws SQLException {
+        ContentValues cv = new ContentValues();
+        cv.put("FIRST_NAME", user.getFARST_NAME());
+        cv.put("LAST_NAME", user.getLAST_NAME());
+        cv.put("MEMBER_SHIP", user.getMEMBER_SHIP());
+        cv.put("JOP_ID", user.getJOP_ID());
+        cv.put("IMAGE_SRC", user.getIMAGE());
+        cv.put("MAP", user.getMAP());
+        cv.put("LATITUDE", user.getLatitude());
+        cv.put("LONGITUDE", user.getLongitude());
+        cv.put("CITY_NAME", user.getCity_name());
+        cv.put("PASSWORD",user.getPASSWORD());
+        cv.put("CITY_ID", user.getCity_id());
 
+        long updated = db.update(Table, cv, "ID=?", new String[]{user.getID() + ""});
+        if (updated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public boolean getUser(String phon, String pass) {
         Cursor cr = db.rawQuery("select * from " + Table + " where PHONE_NUMBER like '" + phon + "' and PASSWORD like '" + pass + "'", null);
         cr.moveToFirst();

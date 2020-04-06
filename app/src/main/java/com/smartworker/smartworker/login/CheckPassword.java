@@ -60,28 +60,50 @@ public class CheckPassword extends AppCompatActivity {
                     int id =db.getUser_id(mPhoneNumber.getText().toString());
                     User user=db.getUser_Info(id);
                     int user_id=user.getID();
+                    int member_id=user.getMEMBER_SHIP();
                     User updateUser =new User();
                     updateUser.setPASSWORD(mNewPassword.getText().toString());
+                    updateUser.setID(user_id);
                     updateUser.setCity_id(user.getCity_id());
                     updateUser.setCity_name(user.getCity_name());
                     updateUser.setLongitude(user.getLongitude());
                     updateUser.setLatitude(user.getLatitude());
                     updateUser.setFARST_NAME(user.getFARST_NAME());
                     updateUser.setLAST_NAME(user.getLAST_NAME());
-                    updateUser.setJOP_ID(user.getJOP_ID());
                     updateUser.setIMAGE(user.getIMAGE());
+                    updateUser.setPHONE_NUMBER(user.getPHONE_NUMBER());
                     updateUser.setMEMBER_SHIP(user.getMEMBER_SHIP());
-                    boolean updated =  db.Update(updateUser);
-                    if (updated) {
-                        Toast.makeText(getApplicationContext(), "Password Restored", Toast.LENGTH_SHORT).show();
-                        Intent in = new Intent(getApplicationContext(), Login.class);
-                        in.putExtra("user_id", user_id);
-                        startActivity(in);
+                    if (member_id == 0) {
+                        boolean updated = db.RestoredPassward(updateUser);
+                        if (updated) {
+                            Toast.makeText(getApplicationContext(), "Password Restored", Toast.LENGTH_SHORT).show();
+                            Intent in = new Intent(getApplicationContext(), Login.class);
+                            in.putExtra("user_id", user_id);
+                            startActivity(in);
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Password not  Restored", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Password not  Restored", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Check From Your Data", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
                     }
 
+                    else {
+                        updateUser.setJOP_ID(user.getJOP_ID());
+                        boolean updated = db.RestoredPassward(updateUser);
+                        if (updated) {
+                            Intent in = new Intent(getApplicationContext(), Login.class);
+                            in.putExtra("user_id", user_id);
+                            startActivity(in);
+                            startActivity(in);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Password not  Restored", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Check From Your Data", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
                 }
 
             }
