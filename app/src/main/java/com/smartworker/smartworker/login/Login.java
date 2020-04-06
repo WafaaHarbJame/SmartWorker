@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity {
 
 
         db_j = new DbOperation_Jops(this);
-
+        db=new DbOperation_Users(this);
         String[] cities = getResources().getStringArray(R.array.cities);
 
         if(!isAdded){

@@ -64,7 +64,7 @@ public class EditProfile extends AppCompatActivity {
     private EditText mLng;
     int position;
 
-    
+
 
     @SuppressLint({"ResourceType", "WrongViewCast"})
     @Override
