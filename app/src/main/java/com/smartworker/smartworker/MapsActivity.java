@@ -29,7 +29,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.smartworker.smartworker.account.Profile;
 import com.smartworker.smartworker.db.DbOperation_Jops;
@@ -224,7 +226,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // getMyLocation();
+                 getMyLocation();
             }
         });
 
@@ -257,32 +259,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private void getMyLocation() {
-
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
         Dexter.withActivity(MapsActivity.this).withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
 
                 if (report.areAllPermissionsGranted()) {
+                    SmartLocation.with(MapsActivity.this).location().oneFix().start(new OnLocationUpdatedListener() {
+                        @Override
+                        public void onLocationUpdated(Location location) {
 
+                           // createMarker(location.getLatitude(), location.getLongitude(), "my location", "", R.drawable.ic_map_customer);
+
+                            LatLng start = new LatLng(location.getLatitude(), location.getLongitude());
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(start, 15));
+                        }
+                    });
+                }
+                if (report.isAnyPermissionPermanentlyDenied()) {
+                    Toast.makeText(MapsActivity.this, "You can't show location without permission  ", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                token.continuePermissionRequest();
 
             }
-        }).check();
-
-        SmartLocation.with(MapsActivity.this).location().oneFix().start(new OnLocationUpdatedListener() {
+        }).withErrorListener(new PermissionRequestErrorListener() {
             @Override
-            public void onLocationUpdated(Location location) {
+            public void onError(DexterError error) {
+                // Toast.makeText(MyWorkerLocationActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
 
-                createMarker(location.getLatitude(), location.getLongitude(), "my location", "", R.drawable.ic_map_customer);
-
-                LatLng start = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(start, 15));
             }
-        });
+        }).onSameThread().check();
+
+
     }
 
     protected Marker createMarker(double latitude, double longitude, String title, String snippet, int iconResID) {

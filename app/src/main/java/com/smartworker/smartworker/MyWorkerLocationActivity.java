@@ -57,7 +57,6 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
         mSaveLocation = findViewById(R.id.saveLocation);
         mMyLocationButton = findViewById(R.id.myLocationButton);
 
-        getMyLocation();
         mMyLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +99,7 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
 
     }
 
-    
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -123,6 +122,8 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
 
 
     private void getMyLocation() {
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         Dexter.withActivity(MyWorkerLocationActivity.this).withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
@@ -133,7 +134,8 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
                         @Override
                         public void onLocationUpdated(Location location) {
 
-                            createMarker(location.getLatitude(), location.getLongitude(), "My location", "", R.drawable.ic_map_customer);
+
+                         createMarker(location.getLatitude(), location.getLongitude(), "My location", "", R.drawable.ic_map);
                             //23.592676, 45.467175
 
                             LatLng start = new LatLng(location.getLatitude(), location.getLongitude());
