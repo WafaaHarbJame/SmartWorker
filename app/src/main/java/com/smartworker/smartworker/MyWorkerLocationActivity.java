@@ -138,8 +138,6 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
 
 
                          createMarker(location.getLatitude(), location.getLongitude(), "My location", "", R.drawable.ic_map);
-                            //23.592676, 45.467175
-
                             LatLng start = new LatLng(location.getLatitude(), location.getLongitude());
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(start, 15));
                             latitude = location.getLatitude();
