@@ -32,6 +32,7 @@ import com.smartworker.smartworker.orders.Orders;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.net.IDN;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -158,7 +159,7 @@ public class RegisterWorker extends AppCompatActivity {
                 city_id = citiesListArray.get(position).getId();
                 city_name = citiesListArray.get(position).getName();
                 double lat = citiesListArray.get(position).getLatitude();
-                Toast.makeText(RegisterWorker.this, "lat" + lat, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(RegisterWorker.this, "lat" + lat, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -393,8 +394,16 @@ public class RegisterWorker extends AppCompatActivity {
         }
     }
 
+//    public byte[] convertBitmapToByte() {
+//        Bitmap bitmap = ((BitmapDrawable) IMAGE_USER.getDrawable()).getBitmap();
+//        return Utile.getbyte(bitmap);
+//    }
+
     public byte[] convertBitmapToByte() {
         Bitmap bitmap = ((BitmapDrawable) IMAGE_USER.getDrawable()).getBitmap();
-        return Utile.getbyte(bitmap);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 }

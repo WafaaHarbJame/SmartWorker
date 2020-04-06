@@ -108,7 +108,8 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
             @Override
             public void onMapClick(LatLng latLng) {
                 mMap.clear();
-                createMarker(latLng.latitude, latLng.longitude, "markar", "", R.drawable.ic_map_customer);
+                getAddress(MyWorkerLocationActivity.this, latLng.latitude, latLng.longitude);
+                createMarker(latLng.latitude, latLng.longitude, "Marker :"+" "+location, "", R.drawable.ic_map_customer);
                 latitude = latLng.latitude;
                 longitude = latLng.longitude;
 
@@ -122,14 +123,15 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
 
 
     private void getMyLocation() {
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         Dexter.withActivity(MyWorkerLocationActivity.this).withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
 
                 if (report.areAllPermissionsGranted()) {
+                    mMap.setMyLocationEnabled(true);
+                    mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
                     SmartLocation.with(MyWorkerLocationActivity.this).location().oneFix().start(new OnLocationUpdatedListener() {
                         @Override
                         public void onLocationUpdated(Location location) {

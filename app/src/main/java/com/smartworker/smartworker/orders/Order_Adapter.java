@@ -1,5 +1,6 @@
 package com.smartworker.smartworker.orders;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartworker.smartworker.Main_Adapter;
 import com.smartworker.smartworker.R;
 import com.smartworker.smartworker.db.DbOperation_Jops;
+import com.smartworker.smartworker.db.DbOperation_Orders;
+import com.smartworker.smartworker.db.DbOperation_Users;
 import com.smartworker.smartworker.login.Jop;
 
 import java.util.ArrayList;
@@ -24,6 +28,8 @@ public class Order_Adapter extends BaseAdapter {
     Context context;
     List<Order> list;
     List<Order> orgList;
+    DbOperation_Users db_user;
+    DbOperation_Orders db_order;
 
 
     public Order_Adapter(Context context, List<Order> list) {
@@ -52,7 +58,8 @@ public class Order_Adapter extends BaseAdapter {
 
         View myView = null;
         if (convertView==null){
-
+            db_user=new DbOperation_Users(context);
+            db_order= new DbOperation_Orders(context);
             LayoutInflater layoutInflater= LayoutInflater.from(context);
             myView=   layoutInflater.inflate(R.layout.to_adapter_order_card,parent,false);
 
@@ -63,6 +70,7 @@ public class Order_Adapter extends BaseAdapter {
             vh.state  =myView.findViewById(R.id.state);
             vh.ts  =myView.findViewById(R.id.time_start);
             vh.date  =myView.findViewById(R.id.date);
+            vh.deleteOrder=myView.findViewById(R.id.deleteOrder);
             myView.setTag(vh);
         } else {
             myView=convertView;
@@ -72,6 +80,7 @@ public class Order_Adapter extends BaseAdapter {
         ViewHolder vh=(ViewHolder)myView.getTag();
         vh.catagory.setText(db_j.getJopNames(o.getCatagoris()));
         vh.detailes.setText(o.getDescription());
+
         myView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +97,31 @@ public class Order_Adapter extends BaseAdapter {
             vh.state.setText("Done");
         }
 
+
+        vh.deleteOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int membership=db_user.getMember(o.getUser_id());
+                if(membership==1){
+                    db_order.deleteOrder(o.getId());
+                    Intent in = new Intent(context, Orders.class);
+                    in.putExtra("user_id", o.getUser_id());
+                    context.startActivity(in);
+                    ((Activity)context).finish();
+
+                }
+                else {
+                    db_order.deleteOrder(o.getId());
+                    Intent in = new Intent(context, Orders.class);
+                    in.putExtra("user_id", o.getUser_id());
+                    context.startActivity(in);
+                    ((Activity)context).finish();
+
+                }
+
+            }
+        });
+
         vh.ts.setText(o.getTime_add());
 
         vh.date.setText(o.getDate_add());
@@ -97,6 +131,7 @@ public class Order_Adapter extends BaseAdapter {
 
     class ViewHolder{
         TextView catagory,detailes,state,ts,date;
+        ImageView deleteOrder;
     }
 
 

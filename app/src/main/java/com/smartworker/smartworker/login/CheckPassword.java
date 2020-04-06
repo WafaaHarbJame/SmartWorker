@@ -65,6 +65,7 @@ public class CheckPassword extends AppCompatActivity {
                     updateUser.setLongitude(user.getLongitude());
                     updateUser.setLatitude(user.getLatitude());
                     updateUser.setFARST_NAME(user.getFARST_NAME());
+                    updateUser.setMAP(user.getMAP());
                     updateUser.setLAST_NAME(user.getLAST_NAME());
                     updateUser.setIMAGE(user.getIMAGE());
                     updateUser.setPHONE_NUMBER(user.getPHONE_NUMBER());

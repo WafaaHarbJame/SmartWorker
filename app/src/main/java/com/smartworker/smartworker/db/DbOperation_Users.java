@@ -76,6 +76,7 @@ public class DbOperation_Users {
         cv.put("JOP_ID", user.getJOP_ID());
         cv.put("IMAGE_SRC", user.getIMAGE());
         cv.put("MAP", user.getMAP());
+        cv.put("PHONE_NUMBER", user.getPHONE_NUMBER());
         cv.put("LATITUDE", user.getLatitude());
         cv.put("LONGITUDE", user.getLongitude());
         cv.put("CITY_NAME", user.getCity_name());
@@ -90,7 +91,8 @@ public class DbOperation_Users {
         }
     }
     public boolean getUser(String phon, String pass) {
-        Cursor cr = db.rawQuery("select * from " + Table + " where PHONE_NUMBER like '" + phon + "' and PASSWORD like '" + pass + "'", null);
+        Cursor cr = db.rawQuery("select * from " + Table + " where PHONE_NUMBER like '"
+                + phon + "' and PASSWORD like '" + pass + "'", null);
         cr.moveToFirst();
         if (!cr.isAfterLast()) {
             cr.close();
@@ -210,7 +212,7 @@ public class DbOperation_Users {
             user.setLatitude(cr.getDouble(10));
             user.setCity_id(cr.getInt(12));
             user.setCity_name(cr.getString(13));
-            user.setIMAGE(getImage(id));
+            user.setIMAGE(cr.getBlob(7));
             if (cr.getInt(5) == 0) {
                 user.setMEMBER_SHIP(cr.getInt(5));
             } else {

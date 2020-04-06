@@ -29,6 +29,7 @@ import com.smartworker.smartworker.db.DbOperation_Jops;
 import com.smartworker.smartworker.db.DbOperation_Users;
 import com.smartworker.smartworker.login.User;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -323,6 +324,13 @@ public class EditProfile extends AppCompatActivity {
 
     public byte[] convertBitmapToByte() {
         Bitmap bitmap = ((BitmapDrawable) IMAGE_USER.getDrawable()).getBitmap();
-        return Utile.getbyte(bitmap);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+
+//                Utile.getbyte(bitmap);
     }
+
+
 }

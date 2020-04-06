@@ -11,6 +11,8 @@
         android:background="@drawable/background_table"
         android:layout_margin="30dp"
         >
+
+
         <LinearLayout
             android:layout_width="220dp"
             android:layout_height="wrap_content"
@@ -57,6 +59,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,6 +69,14 @@
                 android:layout_marginRight="10dp"
                 >
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_delete"
+                    android:layout_marginBottom="10dp"
+                   android:id="@+id/deleteOrder"
+                    android:gravity="right"
+                    android:layout_marginEnd="20dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,8 +85,9 @@
                     android:textColor="#5B717171"
                     android:textSize="16sp"
                     android:id="@+id/time_start"
-
                     />
+
+
             </LinearLayout>
 
 
@@ -91,7 +104,6 @@
                 android:id="@+id/date"
                 android:gravity="right"
                 />
-
 
         </LinearLayout>
 
