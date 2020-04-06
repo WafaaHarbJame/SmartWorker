@@ -63,6 +63,25 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
                 getMyLocation();
             }
         });
+        Dexter.withActivity(MyWorkerLocationActivity.this).withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).withListener(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                token.continuePermissionRequest();
+
+            }
+        }).withErrorListener(new PermissionRequestErrorListener() {
+            @Override
+            public void onError(DexterError error) {
+                // Toast.makeText(MyWorkerLocationActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
+
+            }
+        }).onSameThread().check();
+
+
 
         mSaveLocation.setOnClickListener(new View.OnClickListener() {
             @Override
