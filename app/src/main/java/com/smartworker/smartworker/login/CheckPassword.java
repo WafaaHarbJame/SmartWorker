@@ -16,11 +16,11 @@ import com.smartworker.smartworker.db.DbOperation_Users;
 public class CheckPassword extends AppCompatActivity {
 
     String PhoneNumber, NewPassword, ConfirmPassword;
+    DbOperation_Users db;
     private EditText mPhoneNumber;
     private EditText mNewPassword;
     private EditText mConfirmPassword;
     private Button mSave;
-    DbOperation_Users db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,35 +33,31 @@ public class CheckPassword extends AppCompatActivity {
         PhoneNumber = mPhoneNumber.getText().toString();
         NewPassword = mNewPassword.getText().toString();
         ConfirmPassword = mConfirmPassword.getText().toString();
-        db=new DbOperation_Users(this);
+        db = new DbOperation_Users(this);
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mPhoneNumber.getText().toString() == null |mPhoneNumber.getText().toString().equals("")) {
+                if (mPhoneNumber.getText().toString() == null | mPhoneNumber.getText().toString().equals("")) {
                     mPhoneNumber.setError("Enter Phone Number");
                     mPhoneNumber.requestFocus();
-                }
-                else if (mNewPassword.getText().toString()==null|mNewPassword.getText().toString().equals("")) {
+                } else if (mNewPassword.getText().toString() == null | mNewPassword.getText().toString().equals("")) {
                     mNewPassword.setError("Enter New Password");
                     mNewPassword.requestFocus();
 
-                }
-                else if ( mConfirmPassword.getText().toString().equals("")|  mConfirmPassword.getText().toString()==null) {
+                } else if (mConfirmPassword.getText().toString().equals("") | mConfirmPassword.getText().toString() == null) {
                     mConfirmPassword.setError("Enter Confirm  Password");
                     mConfirmPassword.requestFocus();
 
-                }
-                else if (!ConfirmPassword.equals(NewPassword)) {
+                } else if (!ConfirmPassword.equals(NewPassword)) {
                     mNewPassword.setError("New Password and confirm Not Matching ");
                     mNewPassword.requestFocus();
 
-                }
-                else {
-                    int id =db.getUser_id(mPhoneNumber.getText().toString());
-                    User user=db.getUser_Info(id);
-                    int user_id=user.getID();
-                    int member_id=user.getMEMBER_SHIP();
-                    User updateUser =new User();
+                } else {
+                    int id = db.getUser_id(mPhoneNumber.getText().toString());
+                    User user = db.getUser_Info(id);
+                    int user_id = user.getID();
+                    int member_id = user.getMEMBER_SHIP();
+                    User updateUser = new User();
                     updateUser.setPASSWORD(mNewPassword.getText().toString());
                     updateUser.setID(user_id);
                     updateUser.setCity_id(user.getCity_id());
@@ -76,7 +72,7 @@ public class CheckPassword extends AppCompatActivity {
                     if (member_id == 0) {
                         boolean updated = db.RestoredPassward(updateUser);
                         if (updated) {
-                            Toast.makeText(getApplicationContext(), "Password Restored", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Password Restored Successfully ", Toast.LENGTH_SHORT).show();
                             Intent in = new Intent(getApplicationContext(), Login.class);
                             in.putExtra("user_id", user_id);
                             startActivity(in);
@@ -88,12 +84,11 @@ public class CheckPassword extends AppCompatActivity {
                         }
 
 
-                    }
-
-                    else {
+                    } else {
                         updateUser.setJOP_ID(user.getJOP_ID());
                         boolean updated = db.RestoredPassward(updateUser);
                         if (updated) {
+                            Toast.makeText(getApplicationContext(), "Password Restored Successfully ", Toast.LENGTH_SHORT).show();
                             Intent in = new Intent(getApplicationContext(), Login.class);
                             in.putExtra("user_id", user_id);
                             startActivity(in);
@@ -108,8 +103,6 @@ public class CheckPassword extends AppCompatActivity {
 
             }
         });
-
-
 
 
     }

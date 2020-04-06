@@ -241,7 +241,7 @@ public class RegisterWorker extends AppCompatActivity {
                 user.setMAP(location);
                 boolean isSuccess = db_user.insert(user);
 
-                Toast.makeText(getApplicationContext(), "isSuccess " + isSuccess, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
 
                 Intent in = new Intent(getApplicationContext(), Orders.class);
                 in.putExtra("user_id", db_user.getUser_id(PHONE_NUMBER.getText().toString()));
@@ -385,7 +385,7 @@ public class RegisterWorker extends AppCompatActivity {
             longitude_d = extras.getDouble("longitude");
             location = extras.getString("location");
 
-            Toast.makeText(this, "onActivityResult" + latitude_d, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "onActivityResult" + latitude_d, Toast.LENGTH_SHORT).show();
             location = location;
             mMyLocation.setText(location);
 

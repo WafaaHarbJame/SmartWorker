@@ -118,7 +118,7 @@ public class RegisterCustomer extends AppCompatActivity {
                 city_id = citiesListArray.get(position).getId();
                 city_name = citiesListArray.get(position).getName();
                 double lat = citiesListArray.get(position).getLatitude();
-                Toast.makeText(RegisterCustomer.this, "lat" + lat, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(RegisterCustomer.this, "lat" + lat, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -201,8 +201,7 @@ public class RegisterCustomer extends AppCompatActivity {
                 user.setCity_name(city_name);
                 user.setMAP(location);
                 db_user.insert(user);
-
-                Toast.makeText(getApplicationContext(), "INSETR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterCustomer.this, "Registered Successfully  " , Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(getApplicationContext(), MainActivity.class);
                 in.putExtra("user_id", db_user.getUser_id(PHONE_NUMBER.getText().toString()));
                 startActivity(in);
@@ -347,7 +346,7 @@ public class RegisterCustomer extends AppCompatActivity {
             longitude_d = extras.getDouble("longitude");
             location = extras.getString("location");
 
-            Toast.makeText(this, "onActivityResult" + latitude_d, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "onActivityResult" + latitude_d, Toast.LENGTH_SHORT).show();
             location = location;
             mMyLocation.setText(location);
 

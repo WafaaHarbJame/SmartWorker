@@ -239,20 +239,20 @@ public class EditProfile extends AppCompatActivity {
                 if (member_id == 0) {
                     boolean updated = db_user.Update(u);
                     if (updated) {
-                        Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Updated profile Successfully ", Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(getApplicationContext(), Profile.class);
                         in.putExtra("user_id", id);
                         startActivity(in);
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Not Updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "the Data Not Updated", Toast.LENGTH_SHORT).show();
                         Toast.makeText(getApplicationContext(), "Check From Your Data", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     u.setJOP_ID(jop_id);
                     boolean updated = db_user.Update(u);
                     if (updated) {
-                        Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Updated profile Successfully ", Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(getApplicationContext(), Profile.class);
                         in.putExtra("user_id", id);
                         startActivity(in);
