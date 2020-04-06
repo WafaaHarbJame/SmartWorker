@@ -102,12 +102,14 @@ public class AddPrice extends AppCompatActivity {
                 order.setAcc(1);
                 boolean added = db_order.Update(order,order_id);
                 if(added){
+                    Toast.makeText(getApplicationContext(),"Order Updated",Toast.LENGTH_SHORT).show();
+
                     Intent in = new Intent(getApplicationContext(),ShowOrder.class);
                     in.putExtra("order_id",db_order.getOrderIdLast());
                     in.putExtra("user_id",user_id);
                     startActivity(in);
                 }else {
-                    Toast.makeText(getApplicationContext(),"NOT INSERTED",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Order NOT Updated",Toast.LENGTH_SHORT).show();
                 }
             }
         });

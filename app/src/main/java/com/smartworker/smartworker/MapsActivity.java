@@ -89,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         System.out.println("Log jobId " + job_id);
-        Toast.makeText(MapsActivity.this, "job_id" + job_id, Toast.LENGTH_LONG).show();
+     //   Toast.makeText(MapsActivity.this, "job_id" + job_id, Toast.LENGTH_LONG).show();
 
 //        Log.e("wgetMEMBER_SHIP", "getMEMBER_SHIP" + "\n " + db_user.getMember(user_id));
 //        User user = new User();
@@ -242,7 +242,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 User selectedWorker = workers_list.get(position);
                 workerId = selectedWorker.getID();
 
-                Toast.makeText(MapsActivity.this, "position " + " | " + selectedWorker.getID(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MapsActivity.this, "position " + " | " + selectedWorker.getID(), Toast.LENGTH_SHORT).show();
                 btn_confirm.setVisibility(View.VISIBLE);
 
                 return false;

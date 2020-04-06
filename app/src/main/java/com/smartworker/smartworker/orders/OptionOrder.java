@@ -66,7 +66,7 @@ public class OptionOrder extends AppCompatActivity {
         state = getIntent().getIntExtra("state", 1);
         catogory = getIntent().getStringExtra("job_name");
         jop_id = getIntent().getIntExtra("jop_id", 0);
-        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
 
 
         Description = (EditText) findViewById(R.id.description);
@@ -186,13 +186,15 @@ public class OptionOrder extends AppCompatActivity {
                 }
                 boolean add = db_order.insert(order);
                 if (add) {
+                    Toast.makeText(getApplicationContext(), "Order added Successfully", Toast.LENGTH_SHORT).show();
+
                     Intent in = new Intent(getApplicationContext(), ShowOrder.class);
                     in.putExtra("order_id", db_order.getOrderIdLast());
                     in.putExtra("user_id", User_id);
                     in.putExtra("goMain", true);
                     startActivity(in);
                 } else {
-                    Toast.makeText(getApplicationContext(), "NOT INSERTED", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Order Not added ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
