@@ -208,6 +208,7 @@ public class ShowOrder extends AppCompatActivity {
                 } else {
                     onBackPressed();
                 }
+                
 
             }
         });
@@ -225,6 +226,7 @@ public class ShowOrder extends AppCompatActivity {
                 in.putExtra("order_id", db_order.getOrderId(order_id));
                 in.putExtra("user_id", user_id);
                 startActivity(in);
+                finish();
 
             }
         });
