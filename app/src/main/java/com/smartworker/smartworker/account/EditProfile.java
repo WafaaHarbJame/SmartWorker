@@ -162,6 +162,8 @@ public class EditProfile extends AppCompatActivity {
         } else {
             member.setSelection(1);
             fileds.setSelection(jop_id - 1);
+            Time_ST.setVisibility(View.GONE);
+            Time_ED.setVisibility(View.GONE);
             Time_ST.setText("00:00");
             Time_ED.setText("00:00");
         }
