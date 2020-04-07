@@ -143,30 +143,34 @@ public class Orders extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.context_order,menu);
-    }
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.show:
-                Order order = new Order();
-                order = list.get(Item_postion);
-                Intent in = new Intent(getApplicationContext(),ShowOrder.class);
-                in.putExtra("order_id",order.getId());
-                in.putExtra("user_id",user_id);
-                startActivity(in);
-                break;
-            case R.id.delete:
-
-                break;
-
-        }
-        return super.onContextItemSelected(item);
-    }
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater inflater=getMenuInflater();
+//        inflater.inflate(R.menu.context_order,menu);
+//    }
+//    @Override
+//    public boolean onContextItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.show:
+//                Order order = new Order();
+//                order = list.get(Item_postion);
+//                Intent in = new Intent(getApplicationContext(),ShowOrder.class);
+//              // in.putExtra("user_id",user_id);
+//                in.putExtra("order_id",order.getId());
+//                in.putExtra("user_id",user_id);
+//                startActivity(in);
+//                Log.e("user_id not order","user_id not order"+user_id);
+//                Log.e("order_id","order_id"+order.getId());
+//                Log.e("user_id","user_id"+order.getUser_id());
+//                break;
+//            case R.id.delete:
+//
+//                break;
+//
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 
 
 /* */

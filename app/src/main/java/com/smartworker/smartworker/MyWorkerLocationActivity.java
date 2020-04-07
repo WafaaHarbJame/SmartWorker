@@ -66,7 +66,35 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
         Dexter.withActivity(MyWorkerLocationActivity.this).withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+                if (report.areAllPermissionsGranted()) {
+                    if (mMap != null) {
+
+                        mMap.setMyLocationEnabled(true);
+                        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                        SmartLocation.with(MyWorkerLocationActivity.this).location().oneFix().start(new OnLocationUpdatedListener() {
+                            @Override
+                            public void onLocationUpdated(Location location) {
+
+                                createMarker(location.getLatitude(), location.getLongitude(), "My location", "", R.drawable.ic_map);
+                                LatLng start = new LatLng(location.getLatitude(), location.getLongitude());
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(start, 15));
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                                getAddress(MyWorkerLocationActivity.this, latitude, longitude);
+
+
+                            }
+                        });
+                    }
+
+                    if (report.isAnyPermissionPermanentlyDenied()) {
+                        Toast.makeText(MyWorkerLocationActivity.this, "You can't show location without permission  ", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
             }
+
 
             @Override
             public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {

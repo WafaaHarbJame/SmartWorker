@@ -1,9 +1,5 @@
 package com.smartworker.smartworker.orders;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,12 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.smartworker.smartworker.AddPrice;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.R;
 import com.smartworker.smartworker.db.DbOperation_Jops;
 import com.smartworker.smartworker.db.DbOperation_Orders;
-import com.smartworker.smartworker.Utile;
 import com.smartworker.smartworker.db.DbOperation_Users;
 
 public class ShowOrder extends AppCompatActivity {
@@ -38,6 +36,7 @@ public class ShowOrder extends AppCompatActivity {
     DbOperation_Jops db_jop;
     DbOperation_Users db_user;
     int membership;
+    private Button mDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,7 @@ public class ShowOrder extends AppCompatActivity {
 
         goMain = getIntent().getBooleanExtra("goMain", false);
         db_user = new DbOperation_Users(this);
+        mDone = findViewById(R.id.done);
 
         membership = db_user.getMember(user_id);
 
@@ -68,7 +68,6 @@ public class ShowOrder extends AppCompatActivity {
         tb_state = findViewById(R.id.tb_state);
         tb_command = findViewById(R.id.tb_command);
         tb_order_id = findViewById(R.id.tb_order_id);
-
         tb_image = findViewById(R.id.tb_image);
         btn_back_customer = findViewById(R.id.back_customer);
         btn_back_worker = findViewById(R.id.back_worker);
@@ -76,7 +75,6 @@ public class ShowOrder extends AppCompatActivity {
         btn_accept = findViewById(R.id.btn_accept);
         btn_remove = findViewById(R.id.btn_remove);
         btn_remove_by_customer = findViewById(R.id.btn_remove_by_customer);
-
         l_state = findViewById(R.id.l_state);
         l_price = findViewById(R.id.l_price);
         l_time_accept = findViewById(R.id.l_time_accept);
@@ -117,7 +115,7 @@ public class ShowOrder extends AppCompatActivity {
         tb_time.setText(order.getTime_add());
         tb_date.setText(order.getDate_add());
         tb_description.setText(order.getDescription());
-        if(order.getImageUri()!=null) {
+        if (order.getImageUri() != null) {
             tb_image.setImageURI(Uri.parse(order.getImageUri()));
         }
 
@@ -151,6 +149,7 @@ public class ShowOrder extends AppCompatActivity {
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
             state = "In Progress..";
+            mDone.setVisibility(View.VISIBLE);
             tb_state.setText(state);
         } else if (db_user.getMember(user_id) == 1 && acc == 0 && order.getState() == 1) {
             btn_back_worker.setVisibility(View.VISIBLE);
@@ -226,6 +225,7 @@ public class ShowOrder extends AppCompatActivity {
                 in.putExtra("order_id", db_order.getOrderId(order_id));
                 in.putExtra("user_id", user_id);
                 startActivity(in);
+
             }
         });
         btn_remove.setOnClickListener(new View.OnClickListener() {

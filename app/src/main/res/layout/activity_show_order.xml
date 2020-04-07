@@ -662,6 +662,21 @@
         android:textColor="#fff"
         android:textSize="28sp"
         android:textStyle="bold" />
+    <Button
+        android:id="@+id/done"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/button_green"
+        android:gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Done"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="28sp"
+        android:visibility="gone"
+        android:textStyle="bold" />
 </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     </LinearLayout>

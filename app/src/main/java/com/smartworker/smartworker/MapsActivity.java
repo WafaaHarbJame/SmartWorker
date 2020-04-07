@@ -145,7 +145,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 in.putExtra("job_name", job_name);
                 in.putExtra("jop_id", job_id);
                 Log.e("Sworker_id", "Sworker_id = " + workerId);
-
                 startActivity(in);
             }
         });

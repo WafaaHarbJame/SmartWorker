@@ -85,6 +85,8 @@ public class Profile extends AppCompatActivity {
         if(show){
             btn_setting.setVisibility(View.INVISIBLE);
         }
+        Log.e("user_id profile","user_id profile"+user_id);
+
         first_name.setText(user.getFARST_NAME());
         lastname.setText(user.getLAST_NAME());
         phone.setText(user.getPHONE_NUMBER());

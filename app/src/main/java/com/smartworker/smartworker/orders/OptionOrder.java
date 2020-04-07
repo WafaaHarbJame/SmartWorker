@@ -187,7 +187,6 @@ public class OptionOrder extends AppCompatActivity {
                 boolean add = db_order.insert(order);
                 if (add) {
                     Toast.makeText(getApplicationContext(), "Order added Successfully", Toast.LENGTH_SHORT).show();
-
                     Intent in = new Intent(getApplicationContext(), ShowOrder.class);
                     in.putExtra("order_id", db_order.getOrderIdLast());
                     in.putExtra("user_id", User_id);

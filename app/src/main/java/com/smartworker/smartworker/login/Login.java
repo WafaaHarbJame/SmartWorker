@@ -170,23 +170,24 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db = new DbOperation_Users(getApplicationContext());
-                log = db.getUser(phone_number.getText().toString(),password.getText().toString());
+                String phone=phone_number.getText().toString();
+                log = db.getUser(phone,password.getText().toString());
                 if(log){
                     Intent in ;
-                    if(db.getMember(db.getUser_id(phone_number.getText().toString())) == 1){
+                    if(db.getMember(db.getUser_id(phone)) == 1){
 
                         in = new Intent(getApplicationContext(), Orders.class);
-                        in.putExtra("user_id",db.getUser_id(phone_number.getText().toString()));
+                        sharedPManger.SetData("phone",phone);
+                        in.putExtra("user_id",db.getUser_id(phone));
                        // Toast.makeText(Login.this, ""+db.getUser_id(phone_number.getText().toString()), Toast.LENGTH_SHORT).show();
-
 
                     }else {
                         in = new Intent(getApplicationContext(), MainActivity.class);
-                        in.putExtra("user_id",db.getUser_id(phone_number.getText().toString()));
+                        sharedPManger.SetData("phone",phone);
+                        in.putExtra("user_id",db.getUser_id(phone));
                        // Toast.makeText(Login.this, ""+db.getUser_id(phone_number.getText().toString()), Toast.LENGTH_SHORT).show();
-
                     }
-                    in.putExtra("user_id",db.getUser_id(phone_number.getText().toString()));
+                    in.putExtra("user_id",db.getUser_id(phone));
                     startActivity(in);
                 }else {
                     Toast.makeText(getApplicationContext(),"Check Your Phone Number or Password",Toast.LENGTH_SHORT).show();
