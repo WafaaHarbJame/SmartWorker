@@ -149,7 +149,6 @@ public class ShowOrder extends AppCompatActivity {
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
             state = "In Progress..";
-            mDone.setVisibility(View.VISIBLE);
             tb_state.setText(state);
         } else if (db_user.getMember(user_id) == 1 && acc == 0 && order.getState() == 1) {
             btn_back_worker.setVisibility(View.VISIBLE);
@@ -180,6 +179,7 @@ public class ShowOrder extends AppCompatActivity {
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
             state = "In Progress..";
+            mDone.setVisibility(View.VISIBLE);
             tb_state.setText(state);
         } else if (order.getState() == 3) {
             btn_add_price.setVisibility(View.GONE);
@@ -213,6 +213,25 @@ public class ShowOrder extends AppCompatActivity {
             }
         });
 
+        mDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean issucess=  db_order.UpdateToDone(order_id);
+                if(issucess){
+                    Toast.makeText(ShowOrder.this, "Order Complete Successfully ", Toast.LENGTH_SHORT).show();
+                    mDone.setVisibility(View.GONE);
+
+                }
+                {
+                    Toast.makeText(ShowOrder.this, "Error Occur ", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+            }
+        });
+
         btn_back_worker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,6 +256,7 @@ public class ShowOrder extends AppCompatActivity {
                 Intent in = new Intent(getApplicationContext(), Orders.class);
                 in.putExtra("user_id", user_id);
                 startActivity(in);
+                finish();
             }
         });
         btn_remove_by_customer.setOnClickListener(new View.OnClickListener() {
@@ -246,6 +266,7 @@ public class ShowOrder extends AppCompatActivity {
                 Intent in = new Intent(getApplicationContext(), Orders.class);
                 in.putExtra("user_id", user_id);
                 startActivity(in);
+                finish();
             }
         });
         btn_accept.setOnClickListener(new View.OnClickListener() {
@@ -256,6 +277,7 @@ public class ShowOrder extends AppCompatActivity {
                 in.putExtra("order_id", order_id);
                 in.putExtra("user_id", user_id);
                 startActivity(in);
+                finish();
             }
         });
 

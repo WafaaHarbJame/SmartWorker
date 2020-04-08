@@ -192,6 +192,7 @@ public class OptionOrder extends AppCompatActivity {
                     in.putExtra("user_id", User_id);
                     in.putExtra("goMain", true);
                     startActivity(in);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Order Not added ", Toast.LENGTH_SHORT).show();
                 }
