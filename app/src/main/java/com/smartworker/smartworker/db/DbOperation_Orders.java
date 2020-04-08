@@ -63,6 +63,25 @@ public class DbOperation_Orders {
         }
     }
 
+    public boolean Updateorder(Order order, int id) throws SQLException {
+        ContentValues cv = new ContentValues();
+        cv.put("CASES", order.getCases());
+        cv.put("DATE_ADD", order.getDate_add());
+        cv.put("TIME_ADD", order.getTime_add());
+        cv.put("DESCRIPTION", order.getDescription());
+        cv.put("STATE", order.getState());
+        cv.put("ACC", order.getAcc());
+        cv.put("IMAGE_SRC", order.getImageUri());
+
+
+        long updated = db.update(Table, cv, "ORDER_ID=?", new String[]{id + ""});
+        if (updated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public List<Order> getALLOrders(int id, int member) {
         Cursor cursor;
         if (member == 0) {

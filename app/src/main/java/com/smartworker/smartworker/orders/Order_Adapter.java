@@ -106,8 +106,13 @@ public class Order_Adapter extends BaseAdapter {
             vh.state.setText("In Wait..");
         }else if(o.getState() == 2){
             vh.state.setText("IN Progress..");
+            vh.updateOrder.setVisibility(View.GONE);
+
         }else {
             vh.state.setText("Done");
+            vh.updateOrder.setVisibility(View.GONE);
+
+
         }
 
 
@@ -141,6 +146,12 @@ public class Order_Adapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
+                Intent in = new Intent(context, OptionOrder.class);
+                in.putExtra("user_id",user_id);
+                in.putExtra("order_id",o.getId());
+                in.putExtra("state",o.getState());
+                context.startActivity(in);
+                ((Activity)context).finish();
 
             }
         });

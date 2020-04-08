@@ -52,6 +52,7 @@ public class OptionOrder extends AppCompatActivity {
     String catogory;
     int jop_id;
     String selectedUri;
+    int order_id;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -88,13 +89,73 @@ public class OptionOrder extends AppCompatActivity {
         db_order = new DbOperation_Orders(this);
 
         if (state == 1) {
-            Update_Order.setVisibility(View.INVISIBLE);
-            Add_Order.setVisibility(View.VISIBLE);
-        } else {
             Update_Order.setVisibility(View.VISIBLE);
-            Add_Order.setVisibility(View.INVISIBLE);
-        }
+            Add_Order.setVisibility(View.GONE);
+             order_id= getIntent().getIntExtra("order_id", 0);
+            Order order=db_order.getOrder(order_id);
+            Description.setText(order.getDescription());
+            Tv_Time.setText(order.getTime_add());
+            Tv_Date.setText(order.getDate_add());
+            order_id=order.getId();
 
+        } else {
+            Update_Order.setVisibility(View.GONE);
+            //Add_Order.setVisibility(View.VISIBLE);
+            }
+
+
+        Update_Order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Order order=db_order.getOrder(order_id);
+                if (Description.length() < 20) {
+                    Toast.makeText(getApplicationContext(), "You must describe your needs", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Tv_Time.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "You must choose time of work", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Tv_Date.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "You must choose date of work", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                order.setUser_id(User_id);
+                order.setWorker_id(order.worker_id);
+                order.setCatagoris(order.getCatagoris());
+                order.setCases(order.getCases());
+                order.setTime_add(Tv_Time.getText().toString());
+                order.setDate_add(Tv_Date.getText().toString());
+                order.setDescription(Description.getText().toString());
+                order.setState(1);
+                order.setAcc(0);
+                if(order.getImageUri()!=null){
+                    order.setImageUri(order.getImageUri());
+
+                }
+                if (selectedUri == null) {
+//                    Add_Image.setImageResource(R.drawable.ic_image_defalt);
+//                    order.setImage(convertBitmapToByte());
+                    order.setImageUri(null);
+                } else {
+//                    order.setImage(convertBitmapToByte());
+                    order.setImageUri(selectedUri);
+                }
+                boolean added = db_order.Updateorder(order,order_id);
+                if(added){
+                    Toast.makeText(getApplicationContext(),"Order Updated",Toast.LENGTH_SHORT).show();
+                    Intent in = new Intent(getApplicationContext(),ShowOrder.class);
+                    in.putExtra("order_id",order_id);
+                    in.putExtra("user_id",User_id);
+                    startActivity(in);
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(),"Order NOT Updated",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         Add_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,12 +238,14 @@ public class OptionOrder extends AppCompatActivity {
                 order.setState(1);
                 order.setAcc(0);
                 if (selectedUri == null) {
+                    order.setImageUri(order.getImageUri());
 //                    Add_Image.setImageResource(R.drawable.ic_image_defalt);
 //                    order.setImage(convertBitmapToByte());
                     order.setImageUri(null);
                 } else {
 //                    order.setImage(convertBitmapToByte());
                     order.setImageUri(selectedUri);
+
                 }
                 boolean add = db_order.insert(order);
                 if (add) {
