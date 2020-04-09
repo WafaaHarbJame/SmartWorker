@@ -146,10 +146,12 @@ public class Order_Adapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
+                Toast.makeText(context, "state"+o.getState(), Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(context, OptionOrder.class);
                 in.putExtra("user_id",user_id);
                 in.putExtra("order_id",o.getId());
                 in.putExtra("state",o.getState());
+
                 context.startActivity(in);
                 ((Activity)context).finish();
 

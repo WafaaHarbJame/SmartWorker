@@ -81,7 +81,38 @@ public class DbOperation_Orders {
             return false;
         }
     }
-
+    public int getALLOrdersCOUNT(int id, int member) {
+        Cursor cursor;
+        if (member == 0) {
+            cursor = db.rawQuery("select * from " + Table + " where USER_ID = '" + id + "'", null);
+        } else {
+            cursor = db.rawQuery("select * from " + Table + " where WORKER_ID = '" + id + "'", null);
+        }
+        cursor.moveToFirst();
+        List<Order> list = new ArrayList<Order>();
+        while (!cursor.isAfterLast()) {
+            Order order = new Order();
+            order.setId(cursor.getInt(cursor.getColumnIndex("ORDER_ID")));
+            order.setUser_id(cursor.getInt(cursor.getColumnIndex("USER_ID")));
+            order.setWorker_id(cursor.getInt(cursor.getColumnIndex("WORKER_ID")));
+            order.setCatagoris(cursor.getInt(cursor.getColumnIndex("CATAGORY")));
+            order.setCases(cursor.getInt(cursor.getColumnIndex("CASES")));
+            order.setTime_add(cursor.getString(cursor.getColumnIndex("TIME_ADD")));
+            order.setDate_add(cursor.getString(cursor.getColumnIndex("DATE_ADD")));
+            order.setDescription(cursor.getString(cursor.getColumnIndex("DESCRIPTION")));
+            order.setImageUri(cursor.getString(cursor.getColumnIndex("IMAGE_SRC")));
+            order.setPrice(cursor.getInt(cursor.getColumnIndex("PRICE")));
+            order.setTime_accept(cursor.getString(cursor.getColumnIndex("TIME_ACCEPT")));
+            order.setDate_accept(cursor.getString(cursor.getColumnIndex("DATE_ACCEPT")));
+            order.setCommand(cursor.getString(cursor.getColumnIndex("COMMAND")));
+            order.setState(cursor.getInt(cursor.getColumnIndex("STATE")));
+            order.setAcc(cursor.getInt(cursor.getColumnIndex("ACC")));
+            list.add(order);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list.size();
+    }
     public List<Order> getALLOrders(int id, int member) {
         Cursor cursor;
         if (member == 0) {
@@ -114,7 +145,17 @@ public class DbOperation_Orders {
         cursor.close();
         return list;
     }
-
+    public int  getALLOrdersCount(int id, int member) {
+        Cursor cursor;
+        if (member == 0) {
+            cursor = db.rawQuery("select COUNT(*) from " + Table + " where USER_ID = '" + id + "'", null);
+        } else {
+            cursor = db.rawQuery("select COUNT(*)  from " + Table + " where WORKER_ID = '" + id + "'", null);
+        }
+        cursor.moveToFirst();
+        cursor.close();
+        return cursor.getCount();
+    }
     public int getOrderId(int id) {
         int result;
         Cursor cursor = db.rawQuery("select * from " + Table + " where ORDER_ID = '" + id + "'", null);

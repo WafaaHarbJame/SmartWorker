@@ -64,7 +64,7 @@ public class OptionOrder extends AppCompatActivity {
 
         User_id = getIntent().getIntExtra("user_id", 0);
         Worker_id = getIntent().getIntExtra("worker_id", 0);
-        state = getIntent().getIntExtra("state", 1);
+        state = getIntent().getIntExtra("state", -1);
         catogory = getIntent().getStringExtra("job_name");
         jop_id = getIntent().getIntExtra("jop_id", 0);
 //        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
@@ -100,7 +100,8 @@ public class OptionOrder extends AppCompatActivity {
 
         } else {
             Update_Order.setVisibility(View.GONE);
-            //Add_Order.setVisibility(View.VISIBLE);
+            Add_Order.setVisibility(View.VISIBLE);
+//        }
             }
 
 
@@ -205,7 +206,7 @@ public class OptionOrder extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), Profile.class);
-                in.putExtra("user_id", Worker_id);
+                in.putExtra("user_id", User_id);
                 in.putExtra("show", true);
                 startActivity(in);
             }

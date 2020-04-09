@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".orders.AddOrder"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     >
@@ -246,6 +245,7 @@
             android:textAllCaps="false"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
+            android:visibility="gone"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.Utile;
+import com.smartworker.smartworker.db.DbOperation_Orders;
 import com.smartworker.smartworker.orders.Orders;
 import com.smartworker.smartworker.R;
 import com.smartworker.smartworker.db.DbOperation_Jops;
@@ -34,14 +35,15 @@ public class Profile extends AppCompatActivity {
     int user_id ;
     int member;
     boolean show = false;
-
-
     DbOperation_Users db_user;
     DbOperation_Jops db_jop;
     User user = new User();
+    int int_membership;
     TextView first_name,lastname,phone,membership,location,orders_unm,jop_name;
     LinearLayout jop;
     ImageView image_profile;
+    DbOperation_Orders db_orders;
+    int Number_of_order;
 
     Button btn_back,btn_setting;
     @Override
@@ -59,13 +61,11 @@ public class Profile extends AppCompatActivity {
         orders_unm = (TextView)findViewById(R.id.tv_orders);
         jop_name = (TextView)findViewById(R.id.tv_jop_name);
         membership = (TextView)findViewById(R.id.tv_membership);
-
-
         jop = (LinearLayout)findViewById(R.id.jop);
-
         image_profile=(ImageView)findViewById(R.id.profile_image);
-
-
+        db_user = new DbOperation_Users(this);
+        db_orders = new DbOperation_Orders(this);
+        int_membership = db_user.getMember(user_id);
 
         btn_back=(Button)findViewById(R.id.back);
         btn_setting=(Button)findViewById(R.id.setting);
@@ -75,22 +75,34 @@ public class Profile extends AppCompatActivity {
 
         user = db_user.getUser_Info(user_id);
         member = db_user.getMember(user_id);
+
+        int_membership = db_user.getMember(user_id);
+        if(db_orders.getALLOrdersCOUNT(user_id,int_membership)>0){
+            Number_of_order=db_orders.getALLOrdersCOUNT(user_id,int_membership);
+            Toast.makeText(this, "Number_of_order"+Number_of_order, Toast.LENGTH_SHORT).show();
+
+
+        }
+
         if(user.getMEMBER_SHIP() == 0){
-            jop.setVisibility(View.INVISIBLE);
+            jop.setVisibility(View.GONE);
             membership.setText("Customer");
         }else {
             membership.setText("Worker");
             jop_name.setText(db_jop.getJopNames(user.getJOP_ID()));
         }
         if(show){
-            btn_setting.setVisibility(View.INVISIBLE);
+            btn_setting.setVisibility(View.GONE);
         }
         Log.e("user_id profile","user_id profile"+user_id);
 
         first_name.setText(user.getFARST_NAME());
         lastname.setText(user.getLAST_NAME());
         phone.setText(user.getPHONE_NUMBER());
-        image_profile.setImageBitmap(Utile.getImage(user.getIMAGE()));
+        if(user.getIMAGE()!=null){
+            image_profile.setImageBitmap(Utile.getImage(user.getIMAGE()));
+
+        }
         location.setText(user.getMAP());
         Log.e("city_id", "city_idDB" + user.getCity_id());
 
