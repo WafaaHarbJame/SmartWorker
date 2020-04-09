@@ -35,6 +35,8 @@ public class Order_Adapter extends BaseAdapter {
     SharedPManger sharedPManger;
     int user_id;
     String phone;
+ int  int_membership ;
+
 
     public Order_Adapter(Context context, List<Order> list) {
         this.context = context;
@@ -45,6 +47,7 @@ public class Order_Adapter extends BaseAdapter {
         db_order= new DbOperation_Orders(context);
         phone=sharedPManger.getDataString("phone");
         user_id=db_user.getUser_id(phone);
+        int_membership= db_user.getMember(user_id);
 
     }
 
@@ -102,18 +105,40 @@ public class Order_Adapter extends BaseAdapter {
                 context.startActivity(in);
             }
         });
-        if(o.getState() == 1){
-            vh.state.setText("In Wait..");
-        }else if(o.getState() == 2){
-            vh.state.setText("IN Progress..");
+
+
+        if(int_membership==1){
             vh.updateOrder.setVisibility(View.GONE);
+            if(o.getState() == 1){
+                vh.state.setText("In Wait..");
+            }else if(o.getState() == 2){
+                vh.state.setText("IN Progress..");
+                vh.updateOrder.setVisibility(View.GONE);
 
-        }else {
-            vh.state.setText("Done");
-            vh.updateOrder.setVisibility(View.GONE);
+            }else {
+                vh.state.setText("Done");
+                vh.updateOrder.setVisibility(View.GONE);
 
 
+            }
         }
+        else {
+            vh.updateOrder.setVisibility(View.VISIBLE);
+            if(o.getState() == 1){
+                vh.state.setText("In Wait..");
+            }else if(o.getState() == 2){
+                vh.state.setText("IN Progress..");
+                vh.updateOrder.setVisibility(View.GONE);
+
+            }else {
+                vh.state.setText("Done");
+                vh.updateOrder.setVisibility(View.GONE);
+
+
+            }
+        }
+
+
 
 
         vh.deleteOrder.setOnClickListener(new View.OnClickListener() {
@@ -146,14 +171,16 @@ public class Order_Adapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(context, "state"+o.getState(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(context, "state"+o.getState(), Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(context, OptionOrder.class);
                 in.putExtra("user_id",user_id);
                 in.putExtra("order_id",o.getId());
                 in.putExtra("state",o.getState());
+                in.putExtra("worker_id",o.getWorker_id());
+                in.putExtra("ShowProfile",true);
 
                 context.startActivity(in);
-                ((Activity)context).finish();
+//                ((Activity)context).finish();
 
             }
         });

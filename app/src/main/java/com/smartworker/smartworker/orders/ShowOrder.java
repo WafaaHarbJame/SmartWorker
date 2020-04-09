@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.smartworker.smartworker.AddPrice;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.R;
+import com.smartworker.smartworker.account.Profile;
 import com.smartworker.smartworker.db.DbOperation_Jops;
 import com.smartworker.smartworker.db.DbOperation_Orders;
 import com.smartworker.smartworker.db.DbOperation_Users;
@@ -28,7 +29,7 @@ public class ShowOrder extends AppCompatActivity {
     String state;
     TextView tb_category, tb_case, tb_time, tb_date, tb_description, tb_price, tb_time_accept, tb_date_accept, tb_state, tb_command, tb_order_id;
     ConstraintLayout l_state, l_price, l_time_accept, l_date_accept, l_command;
-    Button btn_back_customer, btn_back_worker, btn_add_price, btn_accept, btn_remove, btn_remove_by_customer;
+    Button btn_back_customer, btn_back_worker, btn_add_price, btn_accept, btn_remove, btn_remove_by_customer,profile;
     LinearLayout action_but;
     ImageView tb_image;
     Order order;
@@ -74,6 +75,7 @@ public class ShowOrder extends AppCompatActivity {
         btn_add_price = findViewById(R.id.btn_add_price);
         btn_accept = findViewById(R.id.btn_accept);
         btn_remove = findViewById(R.id.btn_remove);
+        profile=findViewById(R.id.profile);
         btn_remove_by_customer = findViewById(R.id.btn_remove_by_customer);
         l_state = findViewById(R.id.l_state);
         l_price = findViewById(R.id.l_price);
@@ -118,6 +120,14 @@ public class ShowOrder extends AppCompatActivity {
         if (order.getImageUri() != null) {
             tb_image.setImageURI(Uri.parse(order.getImageUri()));
         }
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getApplicationContext(), Profile.class);
+                in.putExtra("user_id", user_id);
+                startActivity(in);
+            }
+        });
 
         if (db_user.getMember(user_id) == 0 && acc == 0 && order.getState() == 1) {
             btn_remove_by_customer.setVisibility(View.VISIBLE);
@@ -222,6 +232,7 @@ public class ShowOrder extends AppCompatActivity {
                     mDone.setVisibility(View.GONE);
 
                 }
+                else
                 {
                     Toast.makeText(ShowOrder.this, "Error Occur ", Toast.LENGTH_SHORT).show();
 

@@ -43,6 +43,7 @@ public class OptionOrder extends AppCompatActivity {
 
     RadioGroup Group;
     TextView Tv_Time, Tv_Date;
+    boolean show;
     ImageView Add_Image;
     Button Add_time, Add_Date, Add_Order, Update_Order, btn_back, btn_profile;
 
@@ -53,6 +54,7 @@ public class OptionOrder extends AppCompatActivity {
     int jop_id;
     String selectedUri;
     int order_id;
+    boolean ShowProfile;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -67,6 +69,7 @@ public class OptionOrder extends AppCompatActivity {
         state = getIntent().getIntExtra("state", -1);
         catogory = getIntent().getStringExtra("job_name");
         jop_id = getIntent().getIntExtra("jop_id", 0);
+        ShowProfile=getIntent().getBooleanExtra("ShowProfile",false);
 //        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
 
 
@@ -103,6 +106,8 @@ public class OptionOrder extends AppCompatActivity {
             Add_Order.setVisibility(View.VISIBLE);
 //        }
             }
+
+
 
 
         Update_Order.setOnClickListener(new View.OnClickListener() {
@@ -202,12 +207,24 @@ public class OptionOrder extends AppCompatActivity {
             }
         });
 
+        if(User_id==Worker_id){
+            show=true;
+        }
+        else {
+            show=false;
+
+        }
+
+
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), Profile.class);
-                in.putExtra("user_id", User_id);
-                in.putExtra("show", true);
+               // Toast.makeText(OptionOrder.this, "Worker_id"+Worker_id, Toast.LENGTH_SHORT).show();
+                in.putExtra("user_id", Worker_id);
+                in.putExtra("user_id_check", User_id);
+                in.putExtra("show", show);
+                in.putExtra("FROMadapter",true);
                 startActivity(in);
             }
         });

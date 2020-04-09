@@ -178,6 +178,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
+                android:id="@+id/orderImage"
                 android:src="@drawable/ic_orders"
                 />
             <TextView
