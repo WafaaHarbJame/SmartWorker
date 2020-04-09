@@ -16,10 +16,11 @@ public class CreateOPenHelperSQL extends SQLiteOpenHelper {
 
     }
 
+    
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table JOPS(JOP_ID INTEGER  PRIMARY KEY AUTOINCREMENT,JOP_NAME TEXT,IMAGE_SRC BLOB)");
-        
+
         db.execSQL("create table CITIES(CITY_ID INTEGER  PRIMARY KEY AUTOINCREMENT,CITY_NAME TEXT,LONGITUDE REAL,LATITUDE REAL)");
 
         db.execSQL("create table ORDERS(ORDER_ID INTEGER PRIMARY KEY AUTOINCREMENT ," +
