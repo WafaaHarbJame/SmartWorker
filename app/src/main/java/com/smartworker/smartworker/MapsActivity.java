@@ -159,7 +159,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.e("Sworker_id", "Sworker_id = " + workerId);
                 btn_confirm.setVisibility(View.GONE);
                 startActivity(in);
-                
+
 
             }
         });
