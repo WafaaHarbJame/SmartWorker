@@ -227,19 +227,21 @@ public class ShowOrder extends BaseActivity {
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
-            state = "Reject";
+            state = "Rejected";
             tb_state.setText(state);
         }
         btn_back_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (goMain) {
-                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                    in.putExtra("user_id", order.getUser_id());
-                    startActivity(in);
-                } else {
-                    onBackPressed();
-                }
+                onBackPressed();
+
+//                if (goMain) {
+//                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+//                    in.putExtra("user_id", order.getUser_id());
+//                    startActivity(in);
+//                } else {
+//                    onBackPressed();
+//                }
 
 
             }

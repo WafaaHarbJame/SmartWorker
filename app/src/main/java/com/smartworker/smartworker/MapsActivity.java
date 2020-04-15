@@ -1,8 +1,11 @@
 package com.smartworker.smartworker;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.franmontiel.localechanger.LocaleChanger;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,6 +45,7 @@ import com.smartworker.smartworker.orders.OptionOrder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -82,6 +87,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btn_confirm.setVisibility(View.INVISIBLE);
         db_user = new DbOperation_Users(this);
         mProfile = findViewById(R.id.profile);
+        Locale locale = new Locale("en");
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getApplicationContext().getResources().updateConfiguration(config, null);
+        LocaleChanger.setLocale(new Locale("en"));
+        forceRTLIfSupported();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -145,6 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 in.putExtra("job_name", job_name);
                 in.putExtra("jop_id", job_id);
                 Log.e("Sworker_id", "Sworker_id = " + workerId);
+                btn_confirm.setVisibility(View.GONE);
                 startActivity(in);
             }
         });
@@ -303,8 +316,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).anchor(0.5f, 0.5f).title(title).snippet(snippet).icon(BitmapDescriptorFactory.fromResource(iconResID)));
 
 
+
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        newBase = LocaleChanger.configureBaseContext(newBase);
+        super.attachBaseContext(newBase);
+    }
+    private void forceRTLIfSupported()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
+    }
 
 }
 

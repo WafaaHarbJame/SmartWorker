@@ -117,7 +117,7 @@ public class Order_Adapter extends BaseAdapter {
 
             }
             else if(o.getState() == 4){
-                vh.state.setText("Reject..");
+                vh.state.setText("Rejected..");
                 vh.updateOrder.setVisibility(View.GONE);
 
             }
