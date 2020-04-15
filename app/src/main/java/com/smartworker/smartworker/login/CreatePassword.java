@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.R;
 
-public class CreatePassword extends AppCompatActivity {
+public class CreatePassword extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

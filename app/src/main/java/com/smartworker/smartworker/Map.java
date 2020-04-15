@@ -15,7 +15,7 @@ import com.smartworker.smartworker.db.DbOperation_Users;
 import com.smartworker.smartworker.login.User;
 import com.smartworker.smartworker.orders.OptionOrder;
 
-public class Map extends AppCompatActivity {
+public class Map extends BaseActivity {
 
     int user_id,worker_id;
     String name;

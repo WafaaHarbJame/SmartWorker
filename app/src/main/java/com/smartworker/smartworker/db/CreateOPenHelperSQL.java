@@ -16,7 +16,7 @@ public class CreateOPenHelperSQL extends SQLiteOpenHelper {
 
     }
 
-    
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table JOPS(JOP_ID INTEGER  PRIMARY KEY AUTOINCREMENT,JOP_NAME TEXT,IMAGE_SRC BLOB)");

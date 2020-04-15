@@ -232,7 +232,16 @@ public class DbOperation_Orders {
             return false;
         }
     }
-
+    public boolean UpdateToReject(int id) throws SQLException {
+        ContentValues cv = new ContentValues();
+        cv.put("STATE", 4);
+        long updated = db.update(Table, cv, "ORDER_ID=?", new String[]{id + ""});
+        if (updated > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public boolean UpdateToDone(int id) throws SQLException {
         ContentValues cv = new ContentValues();

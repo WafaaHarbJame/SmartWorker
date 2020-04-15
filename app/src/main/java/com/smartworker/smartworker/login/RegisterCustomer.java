@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartworker.smartworker.AppConstants;
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.Cities;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.MyWorkerLocationActivity;
@@ -35,7 +36,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RegisterCustomer extends AppCompatActivity {
+public class RegisterCustomer extends BaseActivity {
 
     private static final int SELECT_PHOTO = 7777;
 

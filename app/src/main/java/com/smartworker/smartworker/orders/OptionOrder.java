@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.account.Profile;
 import com.smartworker.smartworker.R;
@@ -32,7 +33,7 @@ import com.smartworker.smartworker.Utile;
 
 import java.util.Calendar;
 
-public class OptionOrder extends AppCompatActivity {
+public class OptionOrder extends BaseActivity {
 
     private static final int SELECT_PHOTO = 7777;
 

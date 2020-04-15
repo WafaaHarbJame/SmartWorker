@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.Cities;
 import com.smartworker.smartworker.MyWorkerLocationActivity;
 import com.smartworker.smartworker.R;
@@ -35,7 +36,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfile extends BaseActivity {
     int id;
     private static final int SELECT_PHOTO = 7777;
 

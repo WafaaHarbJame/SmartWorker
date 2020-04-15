@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.R;
 import com.smartworker.smartworker.account.Profile;
 import com.smartworker.smartworker.db.DbOperation_Users;
 
-public class CheckPassword extends AppCompatActivity {
+public class CheckPassword extends BaseActivity {
 
     String PhoneNumber, NewPassword, ConfirmPassword;
     DbOperation_Users db;
@@ -21,6 +23,7 @@ public class CheckPassword extends AppCompatActivity {
     private EditText mNewPassword;
     private EditText mConfirmPassword;
     private Button mSave;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,13 @@ public class CheckPassword extends AppCompatActivity {
         NewPassword = mNewPassword.getText().toString();
         ConfirmPassword = mConfirmPassword.getText().toString();
         db = new DbOperation_Users(this);
+        back=findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

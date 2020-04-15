@@ -21,7 +21,7 @@ import com.smartworker.smartworker.orders.ShowOrder;
 
 import java.util.Calendar;
 
-public class AddPrice extends AppCompatActivity {
+public class AddPrice extends BaseActivity {
 
 
     int order_id,user_id;

@@ -17,6 +17,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.Utile;
 import com.smartworker.smartworker.db.DbOperation_Orders;
@@ -30,7 +31,7 @@ import com.smartworker.smartworker.login.User;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends BaseActivity {
 
     int user_id ;
     int member;

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class AboutUs extends AppCompatActivity {
+public class AboutUs extends BaseActivity {
 
     Button back;
     @Override

@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.R;
 import com.smartworker.smartworker.account.Profile;
@@ -29,7 +30,7 @@ import com.smartworker.smartworker.login.Login;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Orders extends AppCompatActivity {
+public class Orders extends BaseActivity {
 
     int user_id;
     int membership;

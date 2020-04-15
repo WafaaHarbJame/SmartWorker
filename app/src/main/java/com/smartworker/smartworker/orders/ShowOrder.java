@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.smartworker.smartworker.AddPrice;
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.MainActivity;
 import com.smartworker.smartworker.R;
 import com.smartworker.smartworker.account.Profile;
@@ -21,7 +22,7 @@ import com.smartworker.smartworker.db.DbOperation_Jops;
 import com.smartworker.smartworker.db.DbOperation_Orders;
 import com.smartworker.smartworker.db.DbOperation_Users;
 
-public class ShowOrder extends AppCompatActivity {
+public class ShowOrder extends BaseActivity {
 
     int order_id, user_id;
     boolean goMain = false;
@@ -29,7 +30,7 @@ public class ShowOrder extends AppCompatActivity {
     String state;
     TextView tb_category, tb_case, tb_time, tb_date, tb_description, tb_price, tb_time_accept, tb_date_accept, tb_state, tb_command, tb_order_id;
     ConstraintLayout l_state, l_price, l_time_accept, l_date_accept, l_command;
-    Button btn_back_customer, btn_back_worker, btn_add_price, btn_accept, btn_remove, btn_remove_by_customer,profile;
+    Button btn_back_customer, btn_back_worker,btn_reject, btn_add_price, btn_accept, btn_remove, btn_remove_by_customer,profile;
     LinearLayout action_but;
     ImageView tb_image;
     Order order;
@@ -84,13 +85,14 @@ public class ShowOrder extends AppCompatActivity {
         l_command = findViewById(R.id.l_command);
 
         action_but = findViewById(R.id.action_but);
-
+        btn_reject=findViewById(R.id.btn_reject);
         db_order = new DbOperation_Orders(this);
         db_jop = new DbOperation_Jops(this);
         db_user = new DbOperation_Users(this);
 
         btn_back_worker.setVisibility(View.GONE);
         btn_add_price.setVisibility(View.GONE);
+        btn_reject.setVisibility(View.GONE);
         btn_remove_by_customer.setVisibility(View.GONE);
         btn_back_customer.setVisibility(View.GONE);
         btn_accept.setVisibility(View.GONE);
@@ -163,6 +165,7 @@ public class ShowOrder extends AppCompatActivity {
         } else if (db_user.getMember(user_id) == 1 && acc == 0 && order.getState() == 1) {
             btn_back_worker.setVisibility(View.VISIBLE);
             btn_add_price.setVisibility(View.VISIBLE);
+            btn_reject.setVisibility(View.VISIBLE);
             state = "In Wait..";
             tb_state.setText(state);
         } else if (db_user.getMember(user_id) == 1 && acc == 1 && order.getState() == 1) {
@@ -193,6 +196,7 @@ public class ShowOrder extends AppCompatActivity {
             tb_state.setText(state);
         } else if (order.getState() == 3) {
             btn_add_price.setVisibility(View.GONE);
+            btn_reject.setVisibility(View.GONE);
             btn_remove_by_customer.setVisibility(View.GONE);
             btn_accept.setVisibility(View.GONE);
             btn_remove.setVisibility(View.GONE);
@@ -208,6 +212,24 @@ public class ShowOrder extends AppCompatActivity {
             tb_state.setText(state);
         }
 
+
+        else if (order.getState() == 4) {
+            btn_add_price.setVisibility(View.GONE);
+            btn_reject.setVisibility(View.GONE);
+            btn_remove_by_customer.setVisibility(View.GONE);
+            btn_accept.setVisibility(View.GONE);
+            btn_remove.setVisibility(View.GONE);
+            l_price.setVisibility(View.GONE);
+            l_time_accept.setVisibility(View.GONE);
+            l_date_accept.setVisibility(View.GONE);
+            l_command.setVisibility(View.GONE);
+            tb_price.setText(order.getPrice() + "");
+            tb_time_accept.setText(order.getTime_accept());
+            tb_date_accept.setText(order.getDate_accept());
+            tb_command.setText(order.getCommand());
+            state = "Reject";
+            tb_state.setText(state);
+        }
         btn_back_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -284,6 +306,17 @@ public class ShowOrder extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db_order.UpdateToProgress(order_id);
+                Intent in = new Intent(getApplicationContext(), ShowOrder.class);
+                in.putExtra("order_id", order_id);
+                in.putExtra("user_id", user_id);
+                startActivity(in);
+                finish();
+            }
+        });
+        btn_reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db_order.UpdateToReject(order_id);
                 Intent in = new Intent(getApplicationContext(), ShowOrder.class);
                 in.putExtra("order_id", order_id);
                 in.putExtra("user_id", user_id);
