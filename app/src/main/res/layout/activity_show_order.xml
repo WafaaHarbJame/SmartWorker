@@ -617,7 +617,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/button_blou"
+            android:background="@drawable/button_red"
             android:gravity="center"
             android:text="Reject"
             android:textAllCaps="false"
