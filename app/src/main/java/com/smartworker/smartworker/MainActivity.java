@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 im.putExtra("job_id", jops.get(position).getId());
                 im.putExtra("jop_name", jops.get(position).getName());
                 startActivity(im);
-                System.out.println("Log main jobId " + jops.get(position).getId());
+              //  System.out.println("Log main jobId " + jops.get(position).getId());
             }
         });
         btn_menu.setOnClickListener(new View.OnClickListener() {

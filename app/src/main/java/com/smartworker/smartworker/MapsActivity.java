@@ -141,7 +141,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent in = new Intent(getApplicationContext(), OptionOrder.class);
                 in.putExtra("user_id", user_id);
                 in.putExtra("worker_id", workerId);
-                in.putExtra("state", 1);
+                in.putExtra("state", 0);
                 in.putExtra("job_name", job_name);
                 in.putExtra("jop_id", job_id);
                 Log.e("Sworker_id", "Sworker_id = " + workerId);
@@ -156,6 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 onBackPressed();
             }
         });
+
 
 
         mCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

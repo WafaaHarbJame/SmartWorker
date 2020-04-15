@@ -43,6 +43,7 @@ public class OptionOrder extends AppCompatActivity {
 
     RadioGroup Group;
     TextView Tv_Time, Tv_Date;
+    boolean show;
     ImageView Add_Image;
     Button Add_time, Add_Date, Add_Order, Update_Order, btn_back, btn_profile;
 
@@ -52,6 +53,8 @@ public class OptionOrder extends AppCompatActivity {
     String catogory;
     int jop_id;
     String selectedUri;
+    int order_id;
+    boolean ShowProfile;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -63,9 +66,10 @@ public class OptionOrder extends AppCompatActivity {
 
         User_id = getIntent().getIntExtra("user_id", 0);
         Worker_id = getIntent().getIntExtra("worker_id", 0);
-        state = getIntent().getIntExtra("state", 1);
+        state = getIntent().getIntExtra("state", -1);
         catogory = getIntent().getStringExtra("job_name");
         jop_id = getIntent().getIntExtra("jop_id", 0);
+        ShowProfile=getIntent().getBooleanExtra("ShowProfile",false);
 //        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
 
 
@@ -88,13 +92,76 @@ public class OptionOrder extends AppCompatActivity {
         db_order = new DbOperation_Orders(this);
 
         if (state == 1) {
-            Update_Order.setVisibility(View.INVISIBLE);
-            Add_Order.setVisibility(View.VISIBLE);
-        } else {
             Update_Order.setVisibility(View.VISIBLE);
-            Add_Order.setVisibility(View.INVISIBLE);
-        }
+            Add_Order.setVisibility(View.GONE);
+             order_id= getIntent().getIntExtra("order_id", 0);
+            Order order=db_order.getOrder(order_id);
+            Description.setText(order.getDescription());
+            Tv_Time.setText(order.getTime_add());
+            Tv_Date.setText(order.getDate_add());
+            order_id=order.getId();
 
+        } else {
+            Update_Order.setVisibility(View.GONE);
+            Add_Order.setVisibility(View.VISIBLE);
+//        }
+            }
+
+
+
+
+        Update_Order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Order order=db_order.getOrder(order_id);
+                if (Description.length() < 20) {
+                    Toast.makeText(getApplicationContext(), "You must describe your needs", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Tv_Time.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "You must choose time of work", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Tv_Date.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "You must choose date of work", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                order.setUser_id(User_id);
+                order.setWorker_id(order.worker_id);
+                order.setCatagoris(order.getCatagoris());
+                order.setCases(order.getCases());
+                order.setTime_add(Tv_Time.getText().toString());
+                order.setDate_add(Tv_Date.getText().toString());
+                order.setDescription(Description.getText().toString());
+                order.setState(1);
+                order.setAcc(0);
+                if(order.getImageUri()!=null){
+                    order.setImageUri(order.getImageUri());
+
+                }
+                if (selectedUri == null) {
+//                    Add_Image.setImageResource(R.drawable.ic_image_defalt);
+//                    order.setImage(convertBitmapToByte());
+                    order.setImageUri(null);
+                } else {
+//                    order.setImage(convertBitmapToByte());
+                    order.setImageUri(selectedUri);
+                }
+                boolean added = db_order.Updateorder(order,order_id);
+                if(added){
+                    Toast.makeText(getApplicationContext(),"Order Updated",Toast.LENGTH_SHORT).show();
+                    Intent in = new Intent(getApplicationContext(),ShowOrder.class);
+                    in.putExtra("order_id",order_id);
+                    in.putExtra("user_id",User_id);
+                    startActivity(in);
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(),"Order NOT Updated",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         Add_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,12 +207,24 @@ public class OptionOrder extends AppCompatActivity {
             }
         });
 
+        if(User_id==Worker_id){
+            show=true;
+        }
+        else {
+            show=false;
+
+        }
+
+
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), Profile.class);
+               // Toast.makeText(OptionOrder.this, "Worker_id"+Worker_id, Toast.LENGTH_SHORT).show();
                 in.putExtra("user_id", Worker_id);
-                in.putExtra("show", true);
+                in.putExtra("user_id_check", User_id);
+                in.putExtra("show", show);
+                in.putExtra("FROMadapter",true);
                 startActivity(in);
             }
         });
@@ -177,12 +256,14 @@ public class OptionOrder extends AppCompatActivity {
                 order.setState(1);
                 order.setAcc(0);
                 if (selectedUri == null) {
+                    order.setImageUri(order.getImageUri());
 //                    Add_Image.setImageResource(R.drawable.ic_image_defalt);
 //                    order.setImage(convertBitmapToByte());
                     order.setImageUri(null);
                 } else {
 //                    order.setImage(convertBitmapToByte());
                     order.setImageUri(selectedUri);
+
                 }
                 boolean add = db_order.insert(order);
                 if (add) {
@@ -192,6 +273,7 @@ public class OptionOrder extends AppCompatActivity {
                     in.putExtra("user_id", User_id);
                     in.putExtra("goMain", true);
                     startActivity(in);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Order Not added ", Toast.LENGTH_SHORT).show();
                 }

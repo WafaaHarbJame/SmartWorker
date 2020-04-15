@@ -66,6 +66,12 @@ public class AddPrice extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         btn_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +115,7 @@ public class AddPrice extends AppCompatActivity {
                     in.putExtra("order_id",db_order.getOrderIdLast());
                     in.putExtra("user_id",user_id);
                     startActivity(in);
+                    finish();
                 }else {
                     Toast.makeText(getApplicationContext(),"Order NOT Updated",Toast.LENGTH_SHORT).show();
                 }
