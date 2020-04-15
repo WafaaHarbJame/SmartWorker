@@ -179,13 +179,13 @@ public class Login extends AppCompatActivity {
                         in = new Intent(getApplicationContext(), Orders.class);
                         sharedPManger.SetData("phone",phone);
                         in.putExtra("user_id",db.getUser_id(phone));
-                       // Toast.makeText(Login.this, ""+db.getUser_id(phone_number.getText().toString()), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(Login.this, ""+db.getUser_id(phone_number.getText().toString()), Toast.LENGTH_SHORT).show();
 
                     }else {
                         in = new Intent(getApplicationContext(), MainActivity.class);
                         sharedPManger.SetData("phone",phone);
                         in.putExtra("user_id",db.getUser_id(phone));
-                       // Toast.makeText(Login.this, ""+db.getUser_id(phone_number.getText().toString()), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(Login.this, ""+db.getUser_id(phone_number.getText().toString()), Toast.LENGTH_SHORT).show();
                     }
                     in.putExtra("user_id",db.getUser_id(phone));
                     startActivity(in);

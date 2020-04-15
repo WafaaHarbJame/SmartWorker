@@ -595,7 +595,7 @@
 <!--    </LinearLayout>-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
@@ -609,6 +609,19 @@
             android:gravity="center"
             android:text="Add Price"
             android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn_reject"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_red"
+            android:gravity="center"
+            android:text="Reject"
+            android:textAllCaps="false"
+            android:layout_below="@id/btn_add_price"
             android:textColor="#fff"
             android:textSize="28sp"
             android:textStyle="bold" />

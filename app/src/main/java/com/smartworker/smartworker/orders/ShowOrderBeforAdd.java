@@ -8,9 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.smartworker.smartworker.BaseActivity;
 import com.smartworker.smartworker.R;
 
-public class ShowOrderBeforAdd extends AppCompatActivity {
+public class ShowOrderBeforAdd extends BaseActivity {
 
     TextView tb_Category,tb_Cases,tb_Time,tb_Date,tb_Description;
     ImageView tb_image;
