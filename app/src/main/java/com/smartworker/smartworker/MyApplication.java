@@ -40,8 +40,8 @@ public class MyApplication extends Application {
         LocaleChanger.initialize(getApplicationContext(), locales);
         LocaleChanger.setLocale(new Locale("en"));
         Stetho.initializeWithDefaults(this);
-        OkHttpClient client = new OkHttpClient();
-        client.networkInterceptors().add(new StethoInterceptor());
+//        OkHttpClient client = new OkHttpClient();
+//        client.networkInterceptors().add(new StethoInterceptor());
 
     }
 
