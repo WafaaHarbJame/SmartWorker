@@ -118,30 +118,7 @@ public class DbOperation_Users {
     }
 
 
-    public List<User> getALLUsers(int id) {
-
-        Cursor cursor = db.rawQuery("select * from " + "USERS" + " where ID = '" + id + "'" + "and MEMBER_SHIP =" + "1", null);
-        cursor.moveToFirst();
-        List<User> list = new ArrayList<User>();
-        while (!cursor.isAfterLast()) {
-            User user_list = new User();
-            user_list.setID(cursor.getInt(0));
-            user_list.setFARST_NAME(cursor.getString(1));
-            user_list.setLAST_NAME(cursor.getString(2));
-            user_list.setPHONE_NUMBER(cursor.getString(3));
-            user_list.setMAP(cursor.getString(9));
-            user_list.setLongitude(cursor.getDouble(10));
-            user_list.setLatitude(cursor.getDouble(11));
-            user_list.setIMAGE(cursor.getBlob(8));
-            user_list.setMEMBER_SHIP(cursor.getInt(6));
-            user_list.setPHONE_NUMBER(cursor.getString(4));
-//            user_list.setJOP_ID(cursor.getInt(7));
-            list.add(user_list);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return list;
-    }
+    
 
     public List<User> getAllUSERS() {
         Cursor cursor = db.rawQuery("select * from USERS", null);
@@ -228,17 +205,6 @@ public class DbOperation_Users {
 
     }
 
-    public byte[] getImage(int id) {
-        Cursor cr = db.rawQuery("select * from " + Table + " where ID = " + id, null);
-
-        byte[] result;
-        cr.moveToFirst();
-        result = cr.getBlob(cr.getColumnIndex("IMAGE_SRC"));
-        cr.close();
-        return result;
-
-
-    }
 
     public boolean isRigester(String phon) {
         Cursor cr = db.rawQuery("select * from " + Table + " where PHONE_NUMBER like '" + phon + "'", null);
@@ -280,18 +246,6 @@ public class DbOperation_Users {
 
     }
 
-    public int getJopId(int id) {
-        Cursor cr = db.rawQuery("select * from " + Table + " where ID = ?", new String[]{Integer.toString(id)});
-        int result;
-        cr.moveToFirst();
-        if (!cr.isAfterLast()) {
-            result = cr.getInt(cr.getColumnIndex("JOP_ID"));
-            cr.close();
-            return result;
-        } else {
-            cr.close();
-            return 0;
-        }
-    }
+
 
 }
