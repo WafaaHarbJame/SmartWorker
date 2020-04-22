@@ -195,7 +195,6 @@ public class OptionOrder extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
                 in.setType("image/*");
                 startActivityForResult(in, SELECT_PHOTO);
             }

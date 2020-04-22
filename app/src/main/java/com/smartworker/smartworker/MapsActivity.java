@@ -315,7 +315,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     protected Marker createMarker(double latitude, double longitude, String title, String snippet, int iconResID) {
 
-        return mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).anchor(0.5f, 0.5f).title(title).snippet(snippet).icon(BitmapDescriptorFactory.fromResource(iconResID)));
+        return mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).anchor(0.5f, 0.5f).title(title).snippet(snippet).icon(BitmapDescriptorFactory.fromResource(iconResID)));
 
 
 

@@ -158,6 +158,7 @@ public class DbOperation_Jops {
         cursor.close();
         return list;
     }
+
     public String getJopNames(int id){
         String name = "";
         Cursor cursor=db.rawQuery("select * from "+Table+" where JOP_ID = '"+id+"'",null);

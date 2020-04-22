@@ -110,7 +110,6 @@ public class Login extends AppCompatActivity {
 
 
 
-
         if(db_j.getSize() < 12){    // later will create activity to add jops
             String[] albums = getResources().getStringArray(R.array.fields);
             ImageView iv = new ImageView(this);

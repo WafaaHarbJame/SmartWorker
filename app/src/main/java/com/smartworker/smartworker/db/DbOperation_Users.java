@@ -118,7 +118,7 @@ public class DbOperation_Users {
     }
 
 
-    
+
 
     public List<User> getAllUSERS() {
         Cursor cursor = db.rawQuery("select * from USERS", null);

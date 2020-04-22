@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.franmontiel.localechanger.LocaleChanger;
+import com.squareup.okhttp.OkHttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +39,9 @@ public class MyApplication extends Application {
         sharedPManger=new SharedPManger(this);
         LocaleChanger.initialize(getApplicationContext(), locales);
         LocaleChanger.setLocale(new Locale("en"));
-
+        Stetho.initializeWithDefaults(this);
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
 
     }
 

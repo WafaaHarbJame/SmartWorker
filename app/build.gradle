@@ -38,5 +38,7 @@ dependencies {
     implementation('io.nlopez.smartlocation:library:3.3.3') {
         transitive = false
     }
+    implementation 'com.facebook.stetho:stetho-okhttp:1.5.1'
+
 
 }

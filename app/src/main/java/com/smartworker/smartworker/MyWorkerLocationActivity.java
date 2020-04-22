@@ -63,7 +63,8 @@ public class MyWorkerLocationActivity extends FragmentActivity implements OnMapR
                 getMyLocation();
             }
         });
-        Dexter.withActivity(MyWorkerLocationActivity.this).withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).withListener(new MultiplePermissionsListener() {
+        Dexter.withActivity(MyWorkerLocationActivity.this).withPermissions(Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
 
