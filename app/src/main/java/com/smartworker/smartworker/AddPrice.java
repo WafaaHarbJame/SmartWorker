@@ -110,7 +110,6 @@ public class AddPrice extends BaseActivity {
                 boolean added = db_order.Update(order,order_id);
                 if(added){
                     Toast.makeText(getApplicationContext(),"Order Updated",Toast.LENGTH_SHORT).show();
-
                     Intent in = new Intent(getApplicationContext(),ShowOrder.class);
                     in.putExtra("order_id",db_order.getOrderIdLast());
                     in.putExtra("user_id",user_id);

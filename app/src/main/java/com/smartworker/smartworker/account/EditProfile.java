@@ -49,7 +49,7 @@ public class EditProfile extends BaseActivity {
     String location;
     Spinner fileds, member;
     int jop_id;
-    int member_id;
+    int membership_id;
     ImageView IMAGE_SELECT;
     CircleImageView IMAGE_USER;
     private Spinner mCity;
@@ -122,7 +122,7 @@ public class EditProfile extends BaseActivity {
 
         User user = new User();
         user = db_user.getUser_Info(id);
-        member_id = db_user.getMember(id);
+        membership_id = db_user.getMember(id);
         FIRST_NAME.setText(user.getFARST_NAME());
         LAST_NAME.setText(user.getLAST_NAME());
         PHONE_NUMBER.setText(user.getPHONE_NUMBER());
@@ -155,7 +155,7 @@ public class EditProfile extends BaseActivity {
         }
 
 
-        if (member_id == 0) {
+        if (membership_id == 0) {
             lay_filed.setVisibility(View.GONE);
             Time_ST.setVisibility(View.GONE);
             Time_ED.setVisibility(View.GONE);
@@ -165,8 +165,8 @@ public class EditProfile extends BaseActivity {
             fileds.setSelection(jop_id - 1);
             Time_ST.setVisibility(View.GONE);
             Time_ED.setVisibility(View.GONE);
-            Time_ST.setText("00:00");
-            Time_ED.setText("00:00");
+            Time_ST.setVisibility(View.GONE);
+            Time_ED.setVisibility(View.GONE);
         }
         if (citiesListArray != null) {
             int pos = 0;
@@ -179,12 +179,12 @@ public class EditProfile extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    member_id = 0;
+                    membership_id = 0;
                     lay_filed.setVisibility(View.GONE);
                     Time_ST.setVisibility(View.GONE);
                     Time_ED.setVisibility(View.GONE);
                 } else {
-                    member_id = 1;
+                    membership_id = 1;
                     lay_filed.setVisibility(View.VISIBLE);
                     Time_ST.setVisibility(View.VISIBLE);
                     Time_ED.setVisibility(View.VISIBLE);
@@ -239,8 +239,8 @@ public class EditProfile extends BaseActivity {
                 u.setLatitude(Double.valueOf(mLat.getText().toString()));
                 u.setLongitude(Double.valueOf(mLng.getText().toString()));
                 u.setLongitude(longitude_d);
-                u.setMEMBER_SHIP(member_id);
-                if (member_id == 0) {
+                u.setMEMBER_SHIP(membership_id);
+                if (membership_id == 0) {
                     boolean updated = db_user.Update(u);
                     if (updated) {
                         Toast.makeText(getApplicationContext(), "Updated profile Successfully ", Toast.LENGTH_SHORT).show();

@@ -646,7 +646,7 @@
             <Button
                 android:id="@+id/btn_remove"
                 android:layout_width="150dp"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/button_red"
                 android:gravity="center"
