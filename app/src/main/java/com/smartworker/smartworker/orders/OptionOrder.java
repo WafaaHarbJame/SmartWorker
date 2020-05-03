@@ -73,7 +73,6 @@ public class OptionOrder extends BaseActivity {
         ShowProfile=getIntent().getBooleanExtra("ShowProfile",false);
 //        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
 
-
         
         Description = (EditText) findViewById(R.id.description);
 
