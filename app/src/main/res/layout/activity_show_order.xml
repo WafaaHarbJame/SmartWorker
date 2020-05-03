@@ -646,7 +646,7 @@
             <Button
                 android:id="@+id/btn_remove"
                 android:layout_width="150dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/button_red"
                 android:gravity="center"
@@ -675,21 +675,23 @@
         android:textColor="#fff"
         android:textSize="28sp"
         android:textStyle="bold" />
+
     <Button
         android:id="@+id/done"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_green"
         android:gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:text="Complete"
         android:textAllCaps="false"
         android:textColor="#fff"
-        android:layout_marginBottom="8dp"
         android:textSize="28sp"
-        android:visibility="gone"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     </LinearLayout>
