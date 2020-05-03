@@ -72,10 +72,7 @@ public class OptionOrder extends BaseActivity {
         jop_id = getIntent().getIntExtra("jop_id", 0);
         ShowProfile=getIntent().getBooleanExtra("ShowProfile",false);
 //        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
-
-        
         Description = (EditText) findViewById(R.id.description);
-
         Group = (RadioGroup) findViewById(R.id.group);
         Tv_Time = (TextView) findViewById(R.id.tv_time);
         Tv_Date = (TextView) findViewById(R.id.tv_date);
