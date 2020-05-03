@@ -110,7 +110,7 @@ public class Order_Adapter extends BaseAdapter {
         if(int_membership==1){
             vh.updateOrder.setVisibility(View.GONE);
             if(o.getState() == 1){
-                vh.state.setText("In Wait..");
+                vh.state.setText("Pending..");
             }else if(o.getState() == 2){
                 vh.state.setText("IN Progress..");
                 vh.updateOrder.setVisibility(View.GONE);
@@ -122,14 +122,14 @@ public class Order_Adapter extends BaseAdapter {
 
             }
             else {
-                vh.state.setText("Done");
+                vh.state.setText("Completed");
                 vh.updateOrder.setVisibility(View.GONE);
             }
         }
         else {
             vh.updateOrder.setVisibility(View.VISIBLE);
             if(o.getState() == 1){
-                vh.state.setText("In Wait..");
+                vh.state.setText("Pending..");
             }else if(o.getState() == 2){
                 vh.state.setText("IN Progress..");
                 vh.updateOrder.setVisibility(View.GONE);
@@ -141,7 +141,7 @@ public class Order_Adapter extends BaseAdapter {
 
             }
             else {
-                vh.state.setText("Done");
+                vh.state.setText("Completed");
                 vh.updateOrder.setVisibility(View.GONE);
 
 

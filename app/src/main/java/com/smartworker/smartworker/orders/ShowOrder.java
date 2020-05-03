@@ -134,7 +134,7 @@ public class ShowOrder extends BaseActivity {
         if (db_user.getMember(user_id) == 0 && acc == 0 && order.getState() == 1) {
             btn_remove_by_customer.setVisibility(View.VISIBLE);
             btn_back_customer.setVisibility(View.VISIBLE);
-            state = "In Wait..";
+            state = "Pending..";
             tb_state.setText(state);
         } else if (db_user.getMember(user_id) == 0 && acc == 1 && order.getState() == 1) {
             btn_back_customer.setVisibility(View.VISIBLE);
@@ -148,7 +148,7 @@ public class ShowOrder extends BaseActivity {
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
-            state = "In Wait..";
+            state = "Pending..";
             tb_state.setText(state);
         } else if (db_user.getMember(user_id) == 0 && order.getState() == 2) {
             btn_back_customer.setVisibility(View.VISIBLE);
@@ -166,7 +166,7 @@ public class ShowOrder extends BaseActivity {
             btn_back_worker.setVisibility(View.VISIBLE);
             btn_add_price.setVisibility(View.VISIBLE);
             btn_reject.setVisibility(View.VISIBLE);
-            state = "In Wait..";
+            state = "Pending..";
             tb_state.setText(state);
         } else if (db_user.getMember(user_id) == 1 && acc == 1 && order.getState() == 1) {
             btn_back_worker.setVisibility(View.VISIBLE);
@@ -179,7 +179,7 @@ public class ShowOrder extends BaseActivity {
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
-            state = "In Wait..";
+            state = "Pending..";
             tb_state.setText(state);
         } else if (db_user.getMember(user_id) == 1 && order.getState() == 2) {
             btn_back_worker.setVisibility(View.VISIBLE);
@@ -208,7 +208,7 @@ public class ShowOrder extends BaseActivity {
             tb_time_accept.setText(order.getTime_accept());
             tb_date_accept.setText(order.getDate_accept());
             tb_command.setText(order.getCommand());
-            state = "Done";
+            state = "Completed";
             tb_state.setText(state);
         }
 

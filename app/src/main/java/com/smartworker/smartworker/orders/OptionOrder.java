@@ -74,6 +74,7 @@ public class OptionOrder extends BaseActivity {
 //        Toast.makeText(OptionOrder.this, "OptionOrder " + jop_id, Toast.LENGTH_SHORT).show();
 
 
+        
         Description = (EditText) findViewById(R.id.description);
 
         Group = (RadioGroup) findViewById(R.id.group);

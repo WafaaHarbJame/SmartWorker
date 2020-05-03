@@ -192,7 +192,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Command"
+            android:text="Comments"
             android:textSize="20dp"
             android:textStyle="normal"
             android:paddingLeft="20dp"
